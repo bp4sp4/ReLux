@@ -3,7 +3,7 @@ spring:
   config:
     import: security-variable.yml
   application:
-    name: FoodStargram
+    name: Relux
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://127.0.0.1:3306/relux

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet" href="/static/css/style.css" />
+<link rel="stylesheet" href="/static/css/footer.css" />
+<body>
+    <div class="wrap">
+    <div>
+        <div class="wrap__interface">
+            <div class="wrap__interface__login">
+                <h1>FoodStargram</h1>
+              
+                    <div class="textbox">
+                        <input type="text" class="idcheck" placeholder="아이디" required id="idInput">
+                        <button type="button" id="duplicateBtn">중복확인</button>
+                    </div>
+                    <div class="duplicate__contents">
+	                    <div class="textblue d-none" id="availableText">사용 가능한 ID 입니다.</div>
+	                    <div class="textred d-none" id="duplicateText">중복된 ID 입니다.</div>
+                    </div>
+                    <div class="textbox">
+                        <input type="password" placeholder="비밀번호" required id="passwordInput">
+                    </div>
+                       <div class="textbox">
+                        <input type="password" placeholder="비밀번호확인" required id="passwordConfirmInput">
+                    </div>
+                       <div class="textbox">
+                        <input type="text" placeholder="이름" required id="nameInput">
+                    </div>
+                       <div class="textbox">
+                        <input type="text" placeholder="이메일" required id="emailInput">
+                    </div>
+                    <button type="button" class="btn" id="joinBtn">가입하기</button>
+                
+            </div>
+          
+                </div>
+                <div class="message">
+                    <p>계정이 없으신가요? <a href="/user/login-view">로그인</a></p>
+                </div>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script>
+		$(document).ready(function() {
+		    
+		    // 중복확인 버튼 
+		    var checkDuplicate = false;
+		    // 중복 여부
+		    var isDuplicateId = true;
+		    
+		    $("#idInput").on("input", function() {
+		        // 중복확인 과정 초기화
+		        checkDuplicate = false;
+		        isDuplicateId = true;
+		        
+		        $("#availableText").addClass("d-none");
+		        $("#duplicateText").addClass("d-none");
+		    });
+		    
+		    $("#duplicateBtn").on("click", function() {
+		        let id = $("#idInput").val();
+		        
+		        if (id == "") {
+		            alert("아이디를 입력하세요.");
+		            return;
+		        }
+		        
+		        $.ajax({
+		            type: "get",
+		            url: "/user/duplicate-id",
+		            data: { "loginId": id },
+		            success: function(data) {
+		                
+		                checkDuplicate = true;
+		                isDuplicateId = data.isDuplicate;
+		                
+		                if (data.isDuplicate) {
+		                    $("#duplicateText").removeClass("d-none");
+		                    $("#availableText").addClass("d-none");
+		                } else {
+		                    $("#availableText").removeClass("d-none");
+		                    $("#duplicateText").addClass("d-none");
+		                }
+		            },
+		            error: function() {
+		                alert("중복 확인 에러!");
+		            }
+		        });
+		        
+		    });
+		    
+		    $("#joinBtn").on("click", function() {
+		        let id = $("#idInput").val();
+		        let password = $("#passwordInput").val();
+		        let passwordConfirm = $("#passwordConfirmInput").val();
+		        let name = $("#nameInput").val();
+		        let email = $("#emailInput").val();
+		
+		        if (id == "") {
+		            alert("아이디를 입력하세요.");
+		            return;
+		        }
+		        
+		        if (!checkDuplicate) { 
+		            alert("아이디 중복확인을 해주세요.");
+		            return;
+		        }
+		        
+		        if (isDuplicateId) {
+		            alert("아이디가 중복되었습니다.");
+		            return;
+		        }
+		
+		        if (password == "") {
+		            alert("비밀번호를 입력하세요.");
+		            return;
+		        }
+		
+		        if (password != passwordConfirm) {
+		            alert("비밀번호가 일치하지 않습니다.");
+		            return;
+		        }
+		
+		        if (name == "") {
+		            alert("이름을 입력하세요.");
+		            return;
+		        }
+		
+		        if (email == "") {
+		            alert("이메일을 입력하세요.");
+		            return;
+		        }
+		
+		        $.ajax({
+		            type: "POST",
+		            url: "/user/join",
+		            data: { "loginId": id, "password": password, "name": name, "email": email },
+		            success: function(data) {
+		                if (data.result === "success") {
+		                    location.href = "/user/login-view";
+		                } else {
+		                    alert("회원가입 실패!" + data.result);
+		                }
+		            },
+		            error: function() {
+		                alert("회원 가입 에러!");
+		            }
+		        });
+		    });
+		});
+</script>
+ <div class="footer">
+      <nav>
+        <a href="https://frontdevpark.tistory.com/" target="_blank">
+          Blog
+        </a>
+        |
+        <a href="https://github.com/bp4sp4/" target="_blank">
+          Github
+        </a>
+      </nav>
+      <p>
+        <span>Copyright 2024. SangHun. All Rights Reserved.</span>
+      </p>
+    </div>
+</body>
+</html>
