@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/swiper.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body>
-메인이야~
+    <header id="main__header">
+        <div id="wrap">
+            <span class="main__logo">ReLux</span>
+            <div class="main__search__wrap">
+                <form action="#">
+                    <div class="w-[500px] h-12 relative flex rounded-xl">
+                        <input style="font-family: 'Paperlogy-8ExtraBold';" required=""
+                            class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#777777] focus:shadow-md"
+                            id="address" type="text" />
+                        <label style="font-family: 'Paperlogy-8ExtraBold';"
+                            class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#777777] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#777777] duration-150"
+                            for="address">
+                            명품을 입력하세요.</label>
+                    </div>
+                </form>
+            </div>
+            <div class="main__login">
+                <a class="main__gologin" id="loginLink" href="/user/login-view">로그인 / 회원가입</a>
+                <span id="userName" style="display: none;"></span> <!-- 사용자 이름 표시 -->
+                <a id="logout" href="/user/logout" style="display: none;">로그아웃</a>
+            </div>
+        </div>
+    </header>
+    <main class="main__wrap">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+1" alt="Slide 1" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+2" alt="Slide 2" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+3" alt="Slide 3" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+4" alt="Slide 4" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+5" alt="Slide 5" />
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </main>
+    
+    <!-- 여기서부터 스크립트 시작 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // 로그인 상태 확인
+            $.ajax({
+                type: "get",
+                url: "/user/session-check",
+                success: function(data) {
+                    if (data.isLoggedIn) {
+                        $("#loginLink").hide(); // 로그인 링크 숨기기
+                        $("#userName").text(data.userName).show(); // 사용자 이름 표시
+                        $("#logout").show(); // 사용자 이름 표시
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="/static/js/swiper.js"></script>
 </body>
+
 </html>

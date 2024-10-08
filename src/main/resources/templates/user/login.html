@@ -4,35 +4,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="/static/css/style.css" />
+<link rel="stylesheet" href="/static/css/login.css" />
 <link rel="stylesheet" href="/static/css/footer.css" />
 <body>
     <div class="wrap">
         <div class="wrap__interface">
-          
-            <div>
             <div class="wrap__interface__login">
-                <h1>FoodStargram</h1>
-              
-              <form id="loginForm">
+                <h1 class="login__title">로그인</h1>
+                <form id="loginForm">
                     <div class="textbox">
-                        <input type="text" placeholder="아이디" required id="loginInput">
+                        <label class="textbox__subtitle">아이디</label>
+                        <input type="text" placeholder="아이디를 입력하세요." required id="loginInput">
                     </div>
                     <div class="textbox">
-                        <input type="password" placeholder="비밀번호" required id="passwordInput">
+                        <label class="textbox__subtitle">비밀번호</label>
+                        <input type="password" placeholder="비밀번호를 입력하세요." required id="passwordInput">
                     </div>
+                    <br>
                     <button type="submit" class="btn" id="loginBtn">로그인</button>
-              </form>
+                </form>
                 <br>
-                <hr class="textbox__hr">
-               <div class="textbox__forgetpw">
-                <a>비밀번호를 잊으셨나요?</a>
+                <div class="user__find">
+                    <a href="" class="user__find__id">아이디 찾기</a>
+                    <a href="" class="user__find__pw">비밀번호 찾기</a>
+                    <a href="/user/join-view" class="user__join">회원가입</a>
                 </div>
             </div>
-             <div class="message">
-                    <p>계정이 없으신가요? <a href="/user/join-view">가입하기</a></p>
-                </div>
-                </div>
         </div>
     </div>
      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

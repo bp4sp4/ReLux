@@ -75,15 +75,31 @@ public class UserRestController {
 			resultMap.put("result", "fail");
 		} else {
 			// 로그인 성공
-			resultMap.put("result", "success");
-		
-			//HttpSession 객체를 가져와서 사용장 정보를 저장
-			HttpSession session = request.getSession();
-			session.setAttribute("userId", user.getId());
-			session.setAttribute("userName", user.getName());
+	        resultMap.put("result", "success");
+	        resultMap.put("userName", user.getName()); // 사용자 이름 추가
+	        
+	        // HttpSession 객체를 가져와서 사용자 정보를 저장
+	        HttpSession session = request.getSession();
+	        session.setAttribute("userId", user.getId());
+	        session.setAttribute("userName", user.getName());
 		}
 		
 		return resultMap;
+	}
+	
+	@GetMapping("/session-check")
+	public Map<String, Object> checkSession(HttpServletRequest request) {
+	    Map<String, Object> resultMap = new HashMap<>();
+	    HttpSession session = request.getSession(false);
+	    
+	    if (session != null && session.getAttribute("userId") != null) {
+	        resultMap.put("isLoggedIn", true);
+	        resultMap.put("userName", session.getAttribute("userName")); // 세션에서 사용자 이름 가져오기
+	    } else {
+	        resultMap.put("isLoggedIn", false);
+	    }
+	    
+	    return resultMap;
 	}
 
 }

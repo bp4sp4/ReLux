@@ -21,13 +21,13 @@ public class UserController {
 		
 		return "user/login";
 	}
-	
+	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("userId");
 		session.removeAttribute("userName");
 		
-		return "redirect:/user/login-view";
+		return "redirect:/main/list-view";
 	}
 }

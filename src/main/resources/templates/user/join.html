@@ -4,45 +4,47 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="/static/css/style.css" />
-<link rel="stylesheet" href="/static/css/footer.css" />
+<link rel="stylesheet" href="/static/css/reset.css" />
+<link rel="stylesheet" href="/static/css/join.css" />
 <body>
     <div class="wrap">
-    <div>
-        <div class="wrap__interface">
-            <div class="wrap__interface__login">
-                <h1>FoodStargram</h1>
-              
+        <div>
+            <div class="wrap__interface">
+                <div class="wrap__interface__login">
+                    <h1 class="login__title">회원가입</h1>
+                    <p class="login__title__subtitle">가입을 위해 필수 정보를 입력해 주세요.</p>
                     <div class="textbox">
-                        <input type="text" class="idcheck" placeholder="아이디" required id="idInput">
+                        <label class="textbox__subtitle">아이디</label>
+                        <input type="text" class="idcheck" placeholder="아이디를 입력해주세요." required id="idInput">
                         <button type="button" id="duplicateBtn">중복확인</button>
                     </div>
                     <div class="duplicate__contents">
-	                    <div class="textblue d-none" id="availableText">사용 가능한 ID 입니다.</div>
-	                    <div class="textred d-none" id="duplicateText">중복된 ID 입니다.</div>
+                        <div class="textblue d-none" id="availableText">사용 가능한 ID 입니다.</div>
+                        <div class="textred d-none" id="duplicateText">중복된 ID 입니다.</div>
                     </div>
                     <div class="textbox">
+                        <label class="textbox__subtitle">비밀번호</label>
                         <input type="password" placeholder="비밀번호" required id="passwordInput">
                     </div>
-                       <div class="textbox">
-                        <input type="password" placeholder="비밀번호확인" required id="passwordConfirmInput">
+                    <div class="textbox">
+                        <label class="textbox__subtitle">비밀번호 확인</label>
+                        <input type="password" placeholder="비밀번호 확인" required id="passwordConfirmInput">
                     </div>
-                       <div class="textbox">
-                        <input type="text" placeholder="이름" required id="nameInput">
+                    <div class="textbox">
+                        <label class="textbox__subtitle">이름</label>
+                        <input type="text" placeholder="홍길동" required id="nameInput">
                     </div>
-                       <div class="textbox">
-                        <input type="text" placeholder="이메일" required id="emailInput">
+                    <div class="textbox">
+                        <label class="textbox__subtitle">이메일</label>
+                        <input type="text" placeholder="abc@relux.com" required id="emailInput">
                     </div>
                     <button type="button" class="btn" id="joinBtn">가입하기</button>
-                
+                    <div class="message">
+                        <p>계정이 있으신가요? <a href="/user/login-view">로그인</a></p>
+                    </div>
+                </div>
             </div>
-          
-                </div>
-                <div class="message">
-                    <p>계정이 없으신가요? <a href="/user/login-view">로그인</a></p>
-                </div>
         </div>
-        
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
