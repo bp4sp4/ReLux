@@ -39,3 +39,32 @@ $(".mySwiper").each(function (elem, target) {
     }
   );
 });
+
+var swiper2 = new Swiper(".mySwiper2", {
+  slidesPerView: 2,
+  centeredSlides: true,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: true,
+  },
+  pagination: {
+    el: ".swiper-pagination2",
+    clickable: true,
+    type: "fraction",
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 40,
+    },
+    1024: {
+      slidesPerView: 2.5,
+      spaceBetween: 30,
+    },
+  },
+});

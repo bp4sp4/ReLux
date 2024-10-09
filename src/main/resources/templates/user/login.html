@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<link rel="stylesheet" href="/static/css/login.css" />
-<link rel="stylesheet" href="/static/css/footer.css" />
-<body>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+
+<section layout:fragment="contents" >
     <div class="wrap">
         <div class="wrap__interface">
             <div class="wrap__interface__login">
@@ -32,9 +29,8 @@
             </div>
         </div>
     </div>
-     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    
-     <script>
+    </section>
+     <script layout:fragment="script">
         $(document).ready(function() {
             $("#loginForm").on("submit", function() {
             	event.preventDefault();
@@ -57,7 +53,8 @@
                     data: {"loginId": id, "password": password},
                     success: function(data) {
                         if(data.result === "success") {
-                            location.href = "/main/list-view";
+                            var previousPage = document.referrer || "/main/list-view"; 
+                            location.href = previousPage;
                         } else {
                             alert("아이디와 비밀번호를 확인해 주세요.");
                         }
@@ -69,19 +66,4 @@
             });
         });
     </script>
-</body>
- <div class="footer">
-      <nav>
-        <a href="https://frontdevpark.tistory.com/" target="_blank">
-          Blog
-        </a>
-        |
-        <a href="https://github.com/bp4sp4/" target="_blank">
-          Github
-        </a>
-      </nav>
-      <p>
-        <span>Copyright 2024. SangHun. All Rights Reserved.</span>
-      </p>
-    </div>
 </html>

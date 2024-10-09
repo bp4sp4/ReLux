@@ -1,0 +1,380 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+.main__filter::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main__filter::-webkit-scrollbar-thumb {
+    background: rgb(194, 194, 194);
+    border-radius: 10px;
+}
+
+.main__filter::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.main__wrap {
+    padding-top: 16px;
+    padding-bottom: 96px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+
+}
+
+.main__wrap .main__wrap__brand {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(12, minmax(0px, 1fr));
+    column-gap: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.main__wrap .main__wrap__brand .main__filter {
+    grid-column: 1 / span 3;
+    padding: 16px 20px 0 0;
+    transition: top 0.3s ease;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.scrolled {
+    background: rgba(255, 255, 255, 0.9);
+    transition: background 0.3s ease;
+    padding-top : 20px;
+}
+
+
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__title {
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 30px;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn {
+    display: flex;
+    align-items: center;
+    color: #8b8b8b;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn>svg {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn:active {
+    color: black;
+    cursor: pointer;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-family: 'GmarketSansMedium';
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category>p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category .main__brand__option {
+    padding-top: 14px;
+    padding-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category .main__brand__option>input {
+    margin-right: 10px;
+}
+
+.main__brand__option input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #777777;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.main__brand__option input[type="radio"]:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.main__brand__option input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2.2px;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.main__brand__option:hover input[type="radio"] {
+    border-color: #4CAF50;
+    background-color: #f0f0f0;
+}
+
+.main__brand__option input[type="radio"]:checked+p {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+
+.main__brand__option p {
+    transition: color 0.2s ease;
+}
+
+/*--------------------- */
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-family: 'GmarketSansMedium';
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2>p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 .main__brand__option2 {
+    padding-top: 14px;
+    padding-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 .main__brand__option2>input {
+    margin-right: 10px;
+}
+
+.main__price__slider {
+    padding: 20px 0 20px 0;
+}
+
+.main__brand__option2 input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #777777;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.main__brand__option2 input[type="radio"]:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.main__brand__option2 input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2.2px;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.main__brand__option2:hover input[type="radio"] {
+    border-color: #4CAF50;
+    background-color: #f0f0f0;
+}
+
+.main__brand__option2 input[type="radio"]:checked+p {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.main__brand__option2 p {
+    transition: color 0.2s ease;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__price__slider {
+    width: 100%;
+    max-width: 400px;
+    font-family: 'GmarketSansMedium';
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__price__slider label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__price__slider p {
+
+    font-size: 1.2em;
+}
+
+.main__wrap .main__wrap__brand .main__filter .main__price__slider input {
+    margin: 20px 0 20px 0;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 5px;
+}
+
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #4CAF50;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+    transition: background 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #4CAF50;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #4CAF50;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #4CAF50;
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap {
+    grid-column: 4 / span 9;
+    padding-left: 14px;
+    font-family: 'GmarketSansMedium';
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap p {
+    font-size: 1.5em;
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail {
+    display: flex;
+    width: 100%;
+    padding: 20px 0 20px 0;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail>img {
+    object-fit: cover;
+    max-height: 240px;
+    border-radius: 12px;
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail .main__brand__thumbnail__desc {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    -webkit-box-pack: justify;
+    padding-left: 20px;
+    justify-content: space-between;
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail .main__brand__thumbnail__desc .main__brand__thumbnail__desc__title>p:nth-child(1) {
+    font-size: 0.8em;
+    padding-bottom: 10px;
+    color: #8b8b8b;
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail .main__brand__thumbnail__desc .main__brand__thumbnail__desc__title>p:nth-child(2) {
+    width: 450px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    font-family: 'Paperlogy-8ExtraBold';
+}
+
+.main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail .main__brand__thumbnail__desc .main__brand__thumbnail__desc__price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    padding-top: 8px;
+    font-size: 1em;
+}

@@ -1,40 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/swiper.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-</head>
-
-<body>
-    <header id="main__header">
-        <div id="wrap">
-            <span class="main__logo">ReLux</span>
-            <div class="main__search__wrap">
-                <form action="#">
-                    <div class="w-[500px] h-12 relative flex rounded-xl">
-                        <input style="font-family: 'Paperlogy-8ExtraBold';" required=""
-                            class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#777777] focus:shadow-md"
-                            id="address" type="text" />
-                        <label style="font-family: 'Paperlogy-8ExtraBold';"
-                            class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#777777] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#777777] duration-150"
-                            for="address">
-                            명품을 입력하세요.</label>
-                    </div>
-                </form>
-            </div>
-            <div class="main__login">
-                <a class="main__gologin" id="loginLink" href="/user/login-view">로그인 / 회원가입</a>
-                <span id="userName" style="display: none;"></span> <!-- 사용자 이름 표시 -->
-                <a id="logout" href="/user/logout" style="display: none;">로그아웃</a>
-            </div>
-        </div>
-    </header>
+<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+        
+        
+<section layout:fragment="contents" >
+  
+      <!-------- 메인 영역 ---------->
     <main class="main__wrap">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -53,34 +25,177 @@
                 <div class="swiper-slide">
                     <img src="https://via.placeholder.com/500x300?text=Slide+5" alt="Slide 5" />
                 </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+6" alt="Slide 6" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+7" alt="Slide 7" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+8" alt="Slide 8" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/500x300?text=Slide+9" alt="Slide 9" />
+                </div>
             </div>
             <div class="swiper-pagination"></div>
+
+        </div>
+        <!-------- 인기 브랜드 TOP6 ---------->
+        <div class="brand__top6">
+            <div>
+                <p class="brand__top6__title">인기 브랜드 <span>TOP6</span></p>
+                <p class="brand__top6__subtitle">인기 있는 브랜드가 다 이유가 있는법! 당신의 마음을 사로잡는 브랜드</p>
+            </div>
+            <div class="all__item">
+                <a href="/brand/list-view">더보기
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="brand__top__img">
+                <ul class="brand__top__list">
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img1" alt="Slide 4" />
+                        <div class="top1"><span>1</span></div>
+                    </li>
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img2" alt="Slide 4" />
+                        <div class="top2"><span>2</span></div>
+                    </li>
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img3" alt="Slide 4" />
+                        <div class="top3"><span>3</span></div>
+                    </li>
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img4" alt="Slide 4" />
+                        <div class="top4"><span>4</span></div>
+                    </li>
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img5" alt="Slide 4" />
+                        <div class="top5"><span>5</span></div>
+                    </li>
+                    <li class="brand__top__item">
+                        <img src="https://via.placeholder.com/500x300?text=img6" alt="Slide 4" />
+                        <div class="top6"><span>6</span></div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-------- 인기 브랜드 TOP6 ---------->
+        <!-------- 금일 추천 브랜드 TOP5 ---------->
+        <div class="today_top5">
+            <p class="today_top5__title">금일의 추천 브랜드 <span>TOP6</span></p>
+            <p class="today_top5__subtitle">금일의 추천 브랜드를 살펴보고 취향을 학인해보세요.</p>
+            <div class="all__item">
+                <a href="">더보기
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://via.placeholder.com/500x300?text=Slide+1" alt="Slide 1" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://via.placeholder.com/500x300?text=Slide+2" alt="Slide 2" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://via.placeholder.com/500x300?text=Slide+3" alt="Slide 3" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://via.placeholder.com/500x300?text=Slide+4" alt="Slide 4" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://via.placeholder.com/500x300?text=Slide+5" alt="Slide 5" />
+                    </div>
+                </div>
+                <div class="swiper-button-next" style="color: rgb(206, 175, 3);"></div>
+                <div class="swiper-button-prev" style="color: rgb(206, 175, 3);"></div>
+            </div>
+        </div>
+        <!-------- 금일 추천 브랜드 TOP5 ---------->
+        <!-------- 중고 명품 마켓 인기 게시글 ---------->
+        <div class="popular__post">
+            <p class="popular__post__title"><span>HOT</span> 중고 명품 마켓 인기 게시글</p>
+            <p class="popular__post__subtitle">스타일과 품질을 겸비한 중고 명품, 지금 가장 인기있는 게시글을 확인해보세요.</p>
+            <div class="all__item">
+                <a href="">더보기
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="popular__post__lists">
+                <ul class="popular__post__list">
+                    <li class="popular__post__items">
+                        <div class="popular__post__img">
+                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
+                                    alt="Slide 5" /></a>
+                        </div>
+                        <div class="popular__post__tit">
+                            <a href="">[중고] 루이비통 가방 이거 사실분 계신가요~~~~~~~~~계신가요~~~~~~~~~계신가요~~~~~~~~~</a>
+                        </div>
+                        <div class="popular__post__author">
+                            <a href="">작성자</a>
+                        </div>
+                    </li>
+                    <li class="popular__post__items">
+                        <div class="popular__post__img">
+                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
+                                    alt="Slide 5" /></a>
+                        </div>
+                        <div class="popular__post__tit">
+                            <a href="">[중고] 루이비통 가방 이거 사실분 계신가요~~~~~~~~~계신가요~~~~~~~~~계신가요~~~~~~~~~</a>
+                        </div>
+                        <div class="popular__post__author">
+                            <a href="">작성자</a>
+                        </div>
+                    </li>
+                    <li class="popular__post__items">
+                        <div class="popular__post__img">
+                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
+                                    alt="Slide 5" /></a>
+                        </div>
+                        <div class="popular__post__tit">
+                            <a href="">[중고] 구찌 가방 이거 사실분 연락주세요. </a>
+                        </div>
+                        <div class="popular__post__author">
+                            <a href="">작성자</a>
+                        </div>
+                    </li>
+                    <li class="popular__post__items">
+                        <div class="popular__post__img">
+                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
+                                    alt="Slide 5" /></a>
+                        </div>
+                        <div class="popular__post__tit">
+                            <a href="">[중고] 루이비통 가방 이거 사실분 짭아님</a>
+                        </div>
+                        <div class="popular__post__author">
+                            <a href="">작성자</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </main>
-    
-    <!-- 여기서부터 스크립트 시작 -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        $(document).ready(function() {
-            // 로그인 상태 확인
-            $.ajax({
-                type: "get",
-                url: "/user/session-check",
-                success: function(data) {
-                    if (data.isLoggedIn) {
-                        $("#loginLink").hide(); // 로그인 링크 숨기기
-                        $("#userName").text(data.userName).show(); // 사용자 이름 표시
-                        $("#logout").show(); // 사용자 이름 표시
-                    }
-                }
-            });
-        });
-    </script>
-    <script src="/static/js/swiper.js"></script>
-</body>
+
+    </section>
+ 
 
 </html>
