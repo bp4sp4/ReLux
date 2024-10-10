@@ -36,9 +36,6 @@
                         <input type="text" placeholder="abc@relux.com" required id="emailInput">
                     </div>
                     <button type="button" class="btn" id="joinBtn">가입하기</button>
-                    <div class="message">
-                        <p>계정이 있으신가요? <a href="/user/login-view">로그인</a></p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +51,6 @@
 		    var isDuplicateId = true;
 		    
 		    $("#idInput").on("input", function() {
-		        // 중복확인 과정 초기화
 		        checkDuplicate = false;
 		        isDuplicateId = true;
 		        

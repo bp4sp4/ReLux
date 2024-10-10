@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/default}">
-
-<section layout:fragment="contents" >
-    <div class="wrap">
-        <div class="wrap__interface">
-            <div class="wrap__interface__login">
-                <h1 class="login__title">로그인</h1>
-                <form id="loginForm">
-                    <div class="textbox">
-                        <label class="textbox__subtitle">아이디</label>
-                        <input type="text" placeholder="아이디를 입력하세요." required id="loginInput">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+</head>
+<body>
+    <section layout:fragment="contents">
+        <div class="wrap">
+            <div class="wrap__interface">
+                <div class="wrap__interface__login">
+                    <h1 class="login__title">로그인</h1>
+                    <form id="loginForm">
+                        <div class="textbox">
+                            <label class="textbox__subtitle">아이디</label>
+                            <input type="text" placeholder="아이디를 입력하세요." required id="loginInput">
+                        </div>
+                        <div class="textbox">
+                            <label class="textbox__subtitle">비밀번호</label>
+                            <input type="password" placeholder="비밀번호를 입력하세요." required id="passwordInput">
+                        </div>
+                        
+                        <button type="submit" class="btn" id="loginBtn">로그인</button>
+                    </form>
+                    <div class="user__find">
+                        <a href="/user/idfind-view" class="user__find__id">아이디 찾기</a>
+                        <a href="/user/pwfind-view" class="user__find__pw">비밀번호 찾기</a>
+                        <a href="/user/join-view" class="user__join">회원가입</a>
                     </div>
-                    <div class="textbox">
-                        <label class="textbox__subtitle">비밀번호</label>
-                        <input type="password" placeholder="비밀번호를 입력하세요." required id="passwordInput">
-                    </div>
-                    <br>
-                    <button type="submit" class="btn" id="loginBtn">로그인</button>
-                </form>
-                <br>
-                <div class="user__find">
-                    <a href="" class="user__find__id">아이디 찾기</a>
-                    <a href="" class="user__find__pw">비밀번호 찾기</a>
-                    <a href="/user/join-view" class="user__join">회원가입</a>
                 </div>
             </div>
         </div>
-    </div>
     </section>
-     <script layout:fragment="script">
+
+    <script layout:fragment="script">
         $(document).ready(function() {
-            $("#loginForm").on("submit", function() {
-            	event.preventDefault();
-                let id = $("#loginInput").val();
-                let password = $("#passwordInput").val();
+            $("#loginForm").on("submit", function(event) {
+                event.preventDefault();  // 여기에 event를 전달해야 함
+                let id = $("#loginInput").val().trim();  // 공백 제거
+                let password = $("#passwordInput").val().trim();  // 공백 제거
                 
                 if(id === "") {
-                    alert("아이디 입력하세요.");
+                    alert("아이디를 입력하세요.");
                     return;
                 }
                 
@@ -48,7 +53,7 @@
                 }
                 
                 $.ajax({
-                    type: "post",
+                    type: "POST",  // POST 메서드는 대문자 권장
                     url: "/user/login",
                     data: {"loginId": id, "password": password},
                     success: function(data) {
@@ -66,4 +71,5 @@
             });
         });
     </script>
+</body>
 </html>

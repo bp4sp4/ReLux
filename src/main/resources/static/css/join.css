@@ -38,8 +38,8 @@ html {
 }
 
 .login__title__subtitle {
-    font-size: 14px;
-    color: #666;
+    font-size : 1rem;
+    color: #b8b8b8;
     text-align: left;
     margin-bottom : 1.5rem;
 }
@@ -91,7 +91,7 @@ html {
     position: absolute;
     width: 50px;
 	height: 45px;
-    top: 21.5px;
+    top: 27.5px;
     right: 0;
 }
 
@@ -118,27 +118,6 @@ html {
 .textbox__forgetpw {
     margin-top: 20px;
 
-}
-
-
-.message {
-    border: 1px solid #dbdbdb;
-    padding: 10px;
-    margin-top: 10px;
-    text-align: center
-}
-
-.message p {
-    font-size: 14px;
-}
-
-.message a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.message a:hover {
-    text-decoration: underline;
 }
 
 .duplicate__contents {

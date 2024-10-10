@@ -11,16 +11,34 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
+	
+	// 회원가입 이동
 	@GetMapping("/join-view")
 	public String inputJoin() {
 		
 		return "user/join";
 	}
+	
+	// 로그인 이동
 	@GetMapping("/login-view")
 	public String inputLogin() {
 		
 		return "user/login";
 	}
+	
+	// 아이다찾기 이동
+	@GetMapping("/idfind-view")
+	public String idFind() {
+		return "user/idfind";
+	}
+	
+	// 비밀번호 찾기 이동
+	@GetMapping("/pwfind-view")
+	public String pwFind() {
+		return "user/pwfind";
+	}
+
+	// 로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
