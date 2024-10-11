@@ -57,10 +57,10 @@
     height: 48px;
 }
 
-.btn {
+#loginBtn {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #007bff; 
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -69,9 +69,7 @@
     height: 48px;
     font-weight: 700;
 }
-.btn:hover {
-	color : #fff !important;
-}
+
 
 .user__find a {
     text-decoration: none;

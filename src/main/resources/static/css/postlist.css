@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+.post__wrap {
+    margin: 0 auto;
+    min-height: 100%;
+    position: relative;
+    max-width: 1200px;
+}
+
+.post__wrap .post__wrap__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+}
+
+.post__wrap .post__wrap__header .post__title {
+    font-size: 1.5rem;
+
+}
+
+.post__wrap .post__wrap__content {
+    position: relative;
+    border-bottom: 2px solid #000;
+}
+
+.post__wrap .post__wrap__content .post__wrap__list {
+    display: table;
+    overflow: hidden;
+    width: 100%;
+}
+
+.post__wrap .post__wrap__content .post__wrap__list .post__wrap__items {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__list_link {
+    color: #000;
+    text-decoration: none;
+}
+
+.post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__list_link>img {
+    height: 170px;
+    margin: 20px 0px 10px 0px;
+    object-fit: cover;
+    border-radius: 6px;
+
+}
+
+.post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__title {
+    font-size: 1rem;
+    letter-spacing: -0.04em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    width: 300px;
+    font-family: 'GmarketSansMedium';
+    margin: 10px 0px 10px 0px;
+}
+
+.post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__author {
+    font-size: 1rem;
+    letter-spacing: -0.04em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    width: 300px;
+    margin: 10px 0px 10px 0px;
+}
+
+.post__wrap .post__wrap__write {
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+}
+
+.post__wrap .post__wrap__write .post_wrap__writeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: 1px solid #d2d2d2;
+    padding: 1em 2rem;
+    text-decoration: none;
+    color: #000;
+    font-family: 'Paperlogy-8ExtraBold';
+}
+
+.post__wrap .post__wrap__write .post_wrap__writeBtn:hover {
+    text-decoration: underline;
+}
+
+.post__wrap .post__pagenation {
+    margin-top: 20px;
+}
+
+.post__wrap .post__pagenation ul li a {
+    color: #000 !important;
+}

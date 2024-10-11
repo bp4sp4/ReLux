@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-아이디찾기~
+  <section layout:fragment="contents">
+        <div class="wrap">
+            <div class="wrap__interface">
+                <div class="wrap__interface__login">
+                    <h1 class="login__title">아이디찾기</h1>
+                    <form id="loginForm">
+                        <div class="textbox">
+                            <label class="textbox__subtitle">이메일</label>
+                            <input type="text" placeholder="abce@relux.com" required id="loginInput">
+                        </div>
+                        <button type="submit" class="btn" id="idfind">아이디 찾기</button>
+                    </form>
+                      <div class="message">
+                        <p>계정이 있으신가요? <a href="/user/login-view">로그인</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

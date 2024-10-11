@@ -14,15 +14,13 @@ public class UserController {
 	
 	// 회원가입 이동
 	@GetMapping("/join-view")
-	public String inputJoin() {
-		
+	public String inputJoin() {	
 		return "user/join";
 	}
 	
 	// 로그인 이동
 	@GetMapping("/login-view")
 	public String inputLogin() {
-		
 		return "user/login";
 	}
 	
@@ -37,6 +35,19 @@ public class UserController {
 	public String pwFind() {
 		return "user/pwfind";
 	}
+	
+	// 아이디 찾기
+	@GetMapping("/idfind-successview")
+	public String idFindSuccess() {
+		return "user/idfindsuccess";
+	}
+	
+	// 비밀번호 찾기
+	@GetMapping("/pwfind-successview")
+	public String pwFindSuccess() {
+		return "user/pwfindsuccess";
+	}
+		
 
 	// 로그아웃
 	@GetMapping("/logout")

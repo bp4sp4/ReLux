@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.post__write__wrap {
+    margin: 0 auto;
+    min-height: 100%;
+    position: relative;
+    max-width: 1200px;
+}
+
+.post__write__wrap .post__write__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+}
+
+.post__write__wrap .post__write__title {
+    font-size: 1.5rem;
+}
+
+.post__write__wrap .post__write__container .post__wrap__register {
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+}
+
+.post__write__wrap .post__write__container .post__wrap__register .post_wrap__registerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: 1px solid #d2d2d2;
+    padding: 1em 2rem;
+    text-decoration: none;
+    color: #000;
+    font-family: 'Paperlogy-8ExtraBold';
+}
+
+.post__write__wrap .post__summernote {
+    margin-top: 2rem;
+}
+
+.input-container {
+    position: relative;
+    margin: 1rem auto;
+    width: 100%;
+
+}
+
+.input-container input::placeholder {
+    color: #d2d2d2;
+}
+
+.input-container input[type="text"] {
+    font-size: 40px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 5px 0;
+    outline: none;
+
+}

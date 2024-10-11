@@ -46,7 +46,9 @@
     WHERE
         `loginId` = #{loginId}
         AND `password` = #{password}
+    LIMIT 1;
 </select>
+
 
 
 <select id="selectUserById" parameterType="int" resultType="com.luxre.relux.user.domain.User">

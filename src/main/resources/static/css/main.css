@@ -15,7 +15,13 @@
 * {
     font-family: 'Paperlogy-8ExtraBold';
 }
+a {
+	color : #000 !important;
+}
 
+a:hover {
+  text-decoration: none !important;
+}
 
 body::-webkit-scrollbar {
     width: 10px;
@@ -179,7 +185,7 @@ a:hover{
     -webkit-box-align: center;
     align-items: center;
     cursor: pointer;
-    color: #777777;
+    color: #777777 !important;
 }
 
 .all__item>a>svg {

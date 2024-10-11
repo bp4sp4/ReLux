@@ -13,6 +13,9 @@
 }
 
 
+
+
+
 .main__filter::-webkit-scrollbar {
     width: 10px;
 }
@@ -61,7 +64,7 @@
 .scrolled {
     background: rgba(255, 255, 255, 0.9);
     transition: background 0.3s ease;
-    padding-top : 20px;
+    padding-top: 20px;
 }
 
 
@@ -80,15 +83,17 @@
     color: #8b8b8b;
 }
 
+.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn:active {
+    color: black;
+    cursor: pointer;
+}
+
 .main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn>svg {
     cursor: pointer;
     margin-right: 5px;
 }
 
-.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn:active {
-    color: black;
-    cursor: pointer;
-}
+
 
 .main__wrap .main__wrap__brand .main__filter .main__brand__choice {
     display: flex;
@@ -338,6 +343,8 @@ input[type="range"]::-moz-range-thumb:hover {
     justify-content: space-between;
     cursor: pointer;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #000;
 }
 
 .main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail>img {
@@ -377,4 +384,12 @@ input[type="range"]::-moz-range-thumb:hover {
     gap: 16px;
     padding-top: 8px;
     font-size: 1em;
+}
+
+.brand__pagenation {
+    margin-top: 20px;
+}
+
+.brand__pagenation ul li a {
+    color: #000 !important;
 }
