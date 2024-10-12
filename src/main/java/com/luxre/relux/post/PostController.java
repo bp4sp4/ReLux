@@ -17,4 +17,10 @@ public class PostController {
 	public String PostWrite() {
 		return "post/write-view";
 	}
+	
+	@GetMapping("/detail-view")
+	public String PostDetail() {
+		//pathvariable
+		return "post/detail-view";
+	}
 }

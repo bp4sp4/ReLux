@@ -36,40 +36,45 @@
     </section>
 
     <script layout:fragment="script">
-        $(document).ready(function() {
-            $("#loginForm").on("submit", function(event) {
-                event.preventDefault();  // 여기에 event를 전달해야 함
-                let id = $("#loginInput").val().trim();  // 공백 제거
-                let password = $("#passwordInput").val().trim();  // 공백 제거
-                
-                if(id === "") {
-                    alert("아이디를 입력하세요.");
-                    return;
-                }
-                
-                if(password === "") {
-                    alert("비밀번호를 입력하세요.");
-                    return;
-                }
-                
-                $.ajax({
-                    type: "POST",  // POST 메서드는 대문자 권장
-                    url: "/user/login",
-                    data: {"loginId": id, "password": password},
-                    success: function(data) {
-                        if(data.result === "success") {
-                            var previousPage = document.referrer || "/main/list-view"; 
-                            location.href = previousPage;
-                        } else {
-                            alert("아이디와 비밀번호를 확인해 주세요.");
-                        }
-                    },
-                    error: function() {
-                        alert("로그인 에러!!");
-                    }
-                });
-            });
-        });
+	$(document).ready(function() {
+   		$("#loginForm").on("submit", function(e) {
+   			
+   			// 이벤트가 가진 기본 기능을 취소 시키기
+   			e.preventDefault();
+   			
+   			let id = $("#loginIdInput").val();
+   			let password = $("#passwordInput").val();
+   			
+   			if(id == "") {
+   				alert("아이디를 입력하세요");
+   				return ;
+   			}
+   			
+   			if(password == "") {
+   				alert("비밀번호를 입력하세요");
+   				return ;
+   			}
+   			
+   			$.ajax({
+   				type:"post"
+   				, url:"/user/login"
+   				, data:{"loginId":id, "password":password}
+   				, success:function(data) {
+   					
+   					if(data.result == "success") {
+   						location.href = "/main/list-view";
+   					} else {
+   						alert("아이디와 비밀번호를 확인해 주세요");
+   					}
+   				}
+   				, error:function() {
+   					alert("로그인 에러!!");
+   				}
+   			});
+   			
+   			
+   		});
+   	});
     </script>
 </body>
 </html>

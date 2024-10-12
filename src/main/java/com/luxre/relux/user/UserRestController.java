@@ -26,29 +26,23 @@ public class UserRestController {
 	
 	@PostMapping("/join")
 	public Map<String, String> join(
-	    @RequestParam("loginId") String loginId,
-	    @RequestParam("password") String password,
-	    @RequestParam("name") String name,
-	    @RequestParam("email") String email) {
-
-	    Map<String, String> resultMap = new HashMap<>();
-
-	    // 중복 아이디 체크
-	    boolean isDuplicate = userService.isDuplicateId(loginId);
-	    if (isDuplicate) {
-	        resultMap.put("result", "duplicate");
-	        return resultMap;
-	    }
-
-	    int count = userService.addUser(loginId, password, name, email);
-
-	    if (count == 1) {
-	        resultMap.put("result", "success");
-	    } else {
-	        resultMap.put("result", "fail");
-	    }
-
-	    return resultMap;
+			@RequestParam("loginId") String loginId
+			,@RequestParam("password") String password
+			,@RequestParam("name") String name
+			, @RequestParam("email") String email
+			) {
+		
+		int count = userService.addUser(loginId, password, name, email);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(count ==1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
 	}
 	// 중복확인 
 	@GetMapping("/duplicate-id")
@@ -98,7 +92,7 @@ public class UserRestController {
 	    
 	    if (session != null && session.getAttribute("userId") != null) {
 	        resultMap.put("isLoggedIn", true);
-	        resultMap.put("userName", session.getAttribute("userName")); // 세션에서 사용자 이름 가져오기
+	        resultMap.put("userName", session.getAttribute("userName")); 
 	    } else {
 	        resultMap.put("isLoggedIn", false);
 	    }
