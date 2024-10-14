@@ -45,10 +45,6 @@
     <script layout:fragment="script">
     $(document).ready(function() {
 		
-		// 중복확인 여부
-		var checkDuplicate = false;
-		// 중복 여부 
-		var isDuplicateId = true;
 		
 		$("#idInput").on("input", function() {
 			// 중복확인 과정 초기화 
@@ -90,15 +86,12 @@
 			
 			
 		});
-		let isRequesting = false;
+		
 		
 		
 		$("#joinBtn").on("click", function() {
-			 event.preventDefault();
-			 
-			 if (isRequesting) return; // 요청 중이면 종료
-			    isRequesting = true; // 요청 시작
-
+			$(this).prop('disabled', true);
+		
 			let id = $("#idInput").val();
 			let password = $("#passwordInput").val();
 			let passwordConfirm = $("#passwordConfirmInput").val();
@@ -110,13 +103,11 @@
 				return ;
 			}
 			
-			// 중복확인을 진행하지 않은 경우 
 			if(!checkDuplicate) {
 				alert("아이디 중복확인을 해주세요");
 				return;
 			}
 			
-			// 아이디가 중복된 경우 
 			if(isDuplicateId) {
 				alert("아이디가 중복되었습니다");
 				return ;
@@ -156,9 +147,7 @@
 			        error: function() {
 			            alert("회원가입 에러!");
 			        },
-			        complete: function() {
-			            isRequesting = false; // 요청 완료
-			        }
+			        
 			    });
 			
 		});

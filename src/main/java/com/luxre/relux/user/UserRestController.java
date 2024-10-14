@@ -32,6 +32,13 @@ public class UserRestController {
 			, @RequestParam("email") String email
 			) {
 		
+		// 중복 아이디 확인
+	    if (userService.isDuplicateId(loginId)) {
+	        Map<String, String> resultMap = new HashMap<>();
+	        resultMap.put("result", "duplicate");
+	        return resultMap;
+	    }
+		
 		int count = userService.addUser(loginId, password, name, email);
 		
 		Map<String, String> resultMap = new HashMap<>();
@@ -85,19 +92,22 @@ public class UserRestController {
 		return resultMap;
 	}
 	
-	@GetMapping("/session-check")
-	public Map<String, Object> checkSession(HttpServletRequest request) {
-	    Map<String, Object> resultMap = new HashMap<>();
-	    HttpSession session = request.getSession(false);
-	    
-	    if (session != null && session.getAttribute("userId") != null) {
-	        resultMap.put("isLoggedIn", true);
-	        resultMap.put("userName", session.getAttribute("userName")); 
-	    } else {
-	        resultMap.put("isLoggedIn", false);
+	 @GetMapping("/session-check")
+	    public Map<String, Object> checkSession(HttpSession session) {
+	        Map<String, Object> response = new HashMap<>();
+	        Integer userId = (Integer) session.getAttribute("userId");
+
+	        if (userId != null) {
+	            // 로그인 상태
+	            response.put("isLoggedIn", true);
+	            User user = userService.getUserById(userId);
+	            response.put("userName", user.getName());
+	        } else {
+	            // 비로그인 상태
+	            response.put("isLoggedIn", false);
+	        }
+
+	        return response;
 	    }
-	    
-	    return resultMap;
-	}
 
 }

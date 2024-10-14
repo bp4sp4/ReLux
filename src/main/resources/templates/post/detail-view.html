@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/default}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
 </head>
 <body>
-<section layout:fragment="contents" >
+<section layout:fragment="contents">
 <main class="post__wrap__detail">
-        <div class="post__wrap__info">
-       
-            <h1 class="post__wrap__info__title">[구찌] 이건 찐이야 진짜</h1>
-            <div class="post__wrap__info__sellerinfo">
-                <div class="post__wrap__info__seller">진품판매자</div>
-                <div class="post__wrap__info__time">2024-10-11 19:24:01</div>
-            </div>
-            <div class="post__wrap__content">
-                이건 너무 찐이야!!
-            </div>
+	<div class="post__wrap__commonBtn">
+            <a href="" class="post__wrap__detail__list">목록</a>
+            <a href="" class="post__wrap__detail__modify">수정</a>
+            <a href="" class="post__wrap__detail__delete">삭제</a>
+        </div>
+    <div class="post__wrap__info">
+        <h1 class="post__wrap__info__title" th:text="${post.title}">[구찌] 이건 찐이야 진짜</h1>
+        <div class="post__wrap__info__sellerinfo">
+            <div class="post__wrap__info__seller" th:text="${user.name}">진품판매자</div>
+            <div class="post__wrap__info__time" th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">2024-09-10 20:33</div>
 
         </div>
-        <div class="post__wrap__reply">
+        <img th:src="${post.imagePath}" alt="게시글 이미지" />
+        <div class="post__wrap__content" th:text="${cleanedContents}">이건 너무 찐이야!!</div>
+    </div>
+    <div class="post__wrap__reply">
             <ul class="post__wrap__reply__list">
                 <li class="post__wrap__reply__items">
                     <div class="post__wrap__replyer"><span>구찌사요</span>
@@ -59,10 +64,7 @@
                 </div>
             </div>
         </div>
-
-
-    </main>
+</main>
 </section>
-
 </body>
 </html>

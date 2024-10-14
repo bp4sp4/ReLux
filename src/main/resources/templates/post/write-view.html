@@ -6,16 +6,6 @@
     <meta charset="UTF-8">
     <title>중고 마켓 글쓰기</title>
 
-    <!-- Latest jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Latest Bootstrap CSS and JS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Summernote CSS and JS (latest version) -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 </head>
 <body>
@@ -25,31 +15,100 @@
         <div class="post__write__container">
             <h1 class="post__write__title">중고 마켓 글쓰기</h1>
             <div class="post__wrap__register">
-                <a href="" class="post_wrap__registerBtn">등록</a>
+                <button id="saveBtn" class="post_wrap__registerBtn">등록</button>
             </div>
         </div>
         <div>
-            <form method="post" class="post__summernote">
                 <div class="input-container">
-                    <input required id="input" type="text" placeholder="제목을 입력하세요." class="form-control"/>
+                    <input id="titleInput" required type="text" placeholder="제목을 입력하세요." class="form-control"/>
                 </div>
 
-                <textarea id="summernote" name="editordata"></textarea>
-            </form>
+                <textarea class="contentsInput" id="summernote" name="editordata"></textarea>
         </div>
     </main>
 </section>
 
-<!-- Summernote Initialization Script -->
 <script layout:fragment="script">
     $(document).ready(function () {
+    	
+        window.imageUrls = []; 
+
         $('#summernote').summernote({
             height: 500,
             placeholder: '내용을 입력하세요.',
-            lang: 'ko-KR'  
+            lang: 'ko-KR',
+            callbacks: {
+                onImageUpload: function(files) {
+                    for (let i = 0; i < files.length; i++) {
+                        uploadImage(files[i]);
+                    }
+                }
+            }
+        });
+
+        function uploadImage(file) {
+            let data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                url: '/post/upload-image',
+                type: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#summernote').summernote('insertImage', response.imageUrl);
+                    window.imageUrls.push(response.imageUrl);
+                },
+                error: function() {
+                    alert('이미지 업로드 실패');
+                }
+            });
+        }
+    });
+
+    // 게시글 작성 및 업로드 처리
+    $("#saveBtn").on("click", function() {
+        let title = $("#titleInput").val();
+        let contents = $('#summernote').summernote('code');
+
+        if (title.trim() === "") {
+            alert("제목을 입력하세요");
+            return;
+        }
+
+        if (contents.trim() === "") {
+            alert("내용을 입력하세요");
+            return;
+        }
+
+        let imagePath = window.imageUrls.length > 0 ? window.imageUrls[window.imageUrls.length - 1] : ""; 
+
+        let formData = new FormData();
+        formData.append("title", title);
+        formData.append("contents", contents);
+        formData.append("imagePath", imagePath);
+
+        $.ajax({
+            type: "post",
+            url: "/post/create",
+            data: formData,
+            enctype: "multipart/form-data",
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.result === "success") {
+                    location.href = "/post/list-view";
+                } else {
+                    alert("글 작성 실패");
+                }
+            },
+            error: function() {
+                alert("글 작성 중 에러 발생!");
+            }
         });
     });
 </script>
+
 
 </body>
 </html>

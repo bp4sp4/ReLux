@@ -26,4 +26,6 @@ public interface UserRepository {
 	
 	// 사용자 조회
 	public User selectUserById(@Param("id") int id);
+
+
 }
