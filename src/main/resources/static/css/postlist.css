@@ -56,8 +56,8 @@
 
 .post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__list_link>img {
     height: 170px;
+    width: 250px;
     margin: 20px 0px 10px 0px;
-    object-fit: cover;
     border-radius: 6px;
 
 }
@@ -115,4 +115,8 @@
 
 .post__wrap .post__pagenation ul li a {
     color: #000 !important;
+}
+
+.post__wrap .post__pagination {
+    margin-top: 20px;
 }

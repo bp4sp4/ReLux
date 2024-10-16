@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/default}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
 <head>
-    <meta charset="UTF-8">
-    <title>중고 마켓 글쓰기</title>
-
-
+<meta charset="UTF-8">
+<title>중고 마켓 글쓰기</title>
 </head>
 <body>
 
-<section layout:fragment="contents">
-    <main class="post__write__wrap">
-        <div class="post__write__container">
-            <h1 class="post__write__title">중고 마켓 글쓰기</h1>
-            <div class="post__wrap__register">
-                <button id="saveBtn" class="post_wrap__registerBtn">등록</button>
-            </div>
-        </div>
-        <div>
-                <div class="input-container">
-                    <input id="titleInput" required type="text" placeholder="제목을 입력하세요." class="form-control"/>
-                </div>
+	<section layout:fragment="contents">
+		<main class="post__write__wrap">
+			<div class="post__write__container">
+				<h1 class="post__write__title">중고 마켓 글쓰기</h1>
+				<div class="post__wrap__register">
+					<button id="saveBtn" class="post_wrap__registerBtn">등록</button>
+				</div>
+			</div>
+			<div>
+				<div class="input-container">
+					<input id="titleInput" required type="text"
+						placeholder="제목을 입력하세요." class="form-control" />
+				</div>
+				<textarea class="contentsInput" id="summernote" name="editordata"></textarea>
+			</div>
+		</main>
+	</section>
 
-                <textarea class="contentsInput" id="summernote" name="editordata"></textarea>
-        </div>
-    </main>
-</section>
-
-<script layout:fragment="script">
+	<script layout:fragment="script">
     $(document).ready(function () {
     	
+    	// 사진담을거 배열로 추가
         window.imageUrls = []; 
 
         $('#summernote').summernote({
@@ -80,7 +79,7 @@
             alert("내용을 입력하세요");
             return;
         }
-
+        // 배열의 최근의 추가된 사진을 가져옴
         let imagePath = window.imageUrls.length > 0 ? window.imageUrls[window.imageUrls.length - 1] : ""; 
 
         let formData = new FormData();

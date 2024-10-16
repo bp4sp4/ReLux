@@ -204,14 +204,18 @@ a:hover{
 .brand__top__img .brand__top__list .brand__top__item {
     flex: 1 1 30%;
     margin: 10px 10px 20px 0px;
-
     position: relative;
+    border: 1px solid #0000001f;
+    border-radius: 6px;
+    display:flex;
+    justify-content : center;
+    align-items : center;
 }
 
 .brand__top__img .brand__top__list .brand__top__item>img {
-    width: 100%;
+    width: 50%;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 6px;
 
 }
@@ -222,6 +226,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;
@@ -238,6 +243,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;
@@ -254,6 +260,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;
@@ -270,6 +277,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;
@@ -286,6 +294,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;
@@ -302,6 +311,7 @@ a:hover{
     height: 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
+    left:0;
     top: 0;
     display: flex;
     align-items: center;

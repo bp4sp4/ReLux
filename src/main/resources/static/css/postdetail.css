@@ -15,6 +15,58 @@
     padding-bottom: 30px;
 }
 
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__list:hover {
+    background-color: #ccc;
+}
+
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__modify {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__modify:hover {
+    background-color: #ccc;
+}
+
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.post__wrap__detail .post__wrap__commonBtn .post__wrap__detail__delete:hover {
+    background-color: #ccc;
+}
+
+
 .post__wrap__detail .post__wrap__info {
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
@@ -46,6 +98,15 @@
     padding: 20px 27px 20px;
     font-family: "Noto Sans", sans-serif;
 }
+
+.post__wrap__detail .post__wrap__info .post__wrap__info__sellerinfo .post__wrap__info__viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 27px 20px;
+    font-family: "Noto Sans", sans-serif;
+}
+
 
 .post__wrap__detail .post__wrap__info .post__wrap__content {
     margin-top: 40px;
