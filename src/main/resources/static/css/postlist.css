@@ -36,6 +36,7 @@
 .post__wrap .post__wrap__content {
     position: relative;
     border-bottom: 2px solid #000;
+    height : 568px;
 }
 
 .post__wrap .post__wrap__content .post__wrap__list {
