@@ -30,28 +30,26 @@
 					</a></li>
 				</ul>
 			</div>
-
 			<!-- 페이지네이션 -->
-
 			<nav class="post__pagination" aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
+					<!-- 처음 버튼 -->
 					<li th:classappend="${currentPage == 1} ? 'disabled'"><a
 						th:href="@{/post/list-view(page=1)}" th:if="${currentPage > 1}"
 						class="page-link">처음</a></li>
 
-					<li th:classappend="${currentPage == 1} ? 'disabled'"><a
-						th:href="@{/post/list-view(page=${currentPage - 1})}"
-						th:if="${currentPage > 1}" class="page-link">&lt;</a></li>
+					<li th:classappend="${startPage == 1} ? 'disabled'"><a
+						th:href="@{/post/list-view(page=${startPage - 1})}"
+						th:if="${startPage > 1}" class="page-link">&lt;</a></li>
 
-					<li th:each="i : ${#numbers.sequence(1, totalPages)}"
+					<li th:each="i : ${#numbers.sequence(startPage, endPage)}"
 						th:classappend="${i == currentPage} ? 'active'"><a
 						th:href="@{/post/list-view(page=${i})}" class="page-link"
 						th:text="${i}">1</a></li>
-
-					<li th:classappend="${currentPage == totalPages} ? 'disabled'">
-						<a th:href="@{/post/list-view(page=${currentPage + 1})}"
-						th:if="${currentPage < totalPages}" class="page-link">&gt;</a>
-					</li>
+					
+					<li th:classappend="${endPage == totalPages} ? 'disabled'"><a
+						th:href="@{/post/list-view(page=${endPage + 1})}"
+						th:if="${endPage < totalPages}" class="page-link">&gt;</a></li>
 
 					<li th:classappend="${currentPage == totalPages} ? 'disabled'">
 						<a th:href="@{/post/list-view(page=${totalPages})}"
@@ -59,7 +57,6 @@
 					</li>
 				</ul>
 			</nav>
-
 
 		</main>
 	</section>

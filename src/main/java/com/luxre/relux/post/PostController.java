@@ -31,16 +31,25 @@ public class PostController {
 
 	@GetMapping("/list-view")
 	public String postList(
-			@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "size", defaultValue = "8") int size, Model model) {
+	        @RequestParam(name = "page", defaultValue = "1") int page,
+	        @RequestParam(name = "size", defaultValue = "8") int size, Model model) {
 
-		Page<PostDto> postDtoPage = postService.getPageList(page - 1, size);
+	    Page<PostDto> postDtoPage = postService.getPageList(page - 1, size);
 
-		model.addAttribute("posts", postDtoPage.getContent());
-		model.addAttribute("currentPage", postDtoPage.getNumber() + 1);
-		model.addAttribute("totalPages", postDtoPage.getTotalPages());
+	    int currentPage = postDtoPage.getNumber() + 1;
+	    int totalPages = postDtoPage.getTotalPages();
+	    int pageSize = 10;
+	    int currentPageGroup = (currentPage - 1) / pageSize + 1;  
+	    int startPage = (currentPageGroup - 1) * pageSize + 1; 
+	    int endPage = Math.min(startPage + pageSize - 1, totalPages); 
 
-		return "post/list-view";
+	    model.addAttribute("posts", postDtoPage.getContent());   
+	    model.addAttribute("currentPage", currentPage);           
+	    model.addAttribute("totalPages", totalPages);            
+	    model.addAttribute("startPage", startPage);              
+	    model.addAttribute("endPage", endPage);                
+
+	    return "post/list-view";
 	}
 
 	@GetMapping("/write-view")
