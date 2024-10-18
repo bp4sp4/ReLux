@@ -1,198 +1,129 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/default}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
 
- <section layout:fragment="contents" >
-          <main class="main__wrap">
-        <section class="main__wrap__brand">
-            <div class="main__filter">
-                <div class="main__brand__title">
-                    <p>Brand</p>
-                    <div id="resetBtn" class="main__brand__resetbtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="resetBtn"
-                            class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+<section layout:fragment="contents">
+	<main class="main__wrap">
+		<section class="main__wrap__brand">
+			<div class="main__filter">
+				<div class="main__brand__title">
+					<p>Brand</p>
+					<div id="resetBtn" class="main__brand__resetbtn">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							fill="currentColor" class="bi bi-arrow-counterclockwise"
+							viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
-                                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
+								d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
                             <path
-                                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
+								d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
                         </svg>
-                        <span>초기화</span>
-                    </div>
-                </div>
-                <section class="main__brand__choice">
-                    <!-- 연령대 -->
-                    <div id="main__brand__category">
-                        <p>연령대</p>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="전체" checked>
-                            <p>전체</p>
-                        </div>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="10대">
-                            <p>10대</p>
-                        </div>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="20대">
-                            <p>20대</p>
-                        </div>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="30대">
-                            <p>30대</p>
-                        </div>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="40대">
-                            <p>40대</p>
-                        </div>
-                        <div class="main__brand__option">
-                            <input type="radio" name="age" value="50대">
-                            <p>50대</p>
-                        </div>
-                    </div>
+						<span>초기화</span>
+					</div>
+				</div>
 
-                    <!-- 브랜드 -->
-                    <div id="main__brand__category2">
-                        <p>브랜드</p>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="전체" checked>
-                            <p>전체</p>
-                        </div>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="루이비통">
-                            <p>루이비통(Louis Vuitton)</p>
-                        </div>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="샤넬">
-                            <p>샤넬(Chanel)</p>
-                        </div>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="에르메스">
-                            <p>에르메스(Hermès)</p>
-                        </div>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="구찌">
-                            <p>구찌(Gucci)</p>
-                        </div>
-                        <div class="main__brand__option2">
-                            <input type="radio" name="brand" value="디올">
-                            <p>디올(Dior)</p>
-                        </div>
-                    </div>
+				<!-- 연령대 -->
+				<section class="main__brand__choice">
+					<div id="main__brand__category">
+						<p>연령대</p>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="전체" checked>
+							<p>전체</p>
+						</div>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="10대">
+							<p>10대</p>
+						</div>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="20대">
+							<p>20대</p>
+						</div>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="30대">
+							<p>30대</p>
+						</div>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="40대">
+							<p>40대</p>
+						</div>
+						<div class="main__brand__option">
+							<input type="radio" name="age" value="50대">
+							<p>50대</p>
+						</div>
+					</div>
 
-                    <!-- 가격 -->
-                    <div class="main__price__slider">
-                        <p class="">가격</p>
-                        <input type="range" id="priceRange" min="0" max="1000" value="0" step="100">
-                        <label for="priceRange">가격 범위: <span id="priceValue">1000만원</span></label>
-                    </div>
-                </section>
-            </div>
-            <div class="main__brand__imgwrap">
-                <p>검색 결과 N개</p>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
+					<!-- 브랜드 -->
+					<div id="main__brand__category2">
+						<p>브랜드</p>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="전체" checked>
+							<p>전체</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="루이비통">
+							<p>루이비통(Louis Vuitton)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="샤넬">
+							<p>샤넬(Chanel)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="에르메스">
+							<p>에르메스(Hermès)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="구찌">
+							<p>구찌(Gucci)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="디올">
+							<p>디올(Dior)</p>
+						</div>
+					</div>
 
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
+					<!-- 가격 -->
+					<div class="main__price__slider">
+						<p class="">가격</p>
+						<input type="range" id="priceRange" min="0" max="1000" value="0"
+							step="100"> <label for="priceRange">가격 범위: <span
+							id="priceValue">1000만원</span></label>
+					</div>
+				</section>
+			</div>
 
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
-                </a>
-                <a class="main__brand__thumbnail" href="">
-                    <img src="https://via.placeholder.com/390x240?text=brand" alt="Slide 1" />
-                    <div class="main__brand__thumbnail__desc">
-                        <div class="main__brand__thumbnail__desc__title">
-                            <p>브랜드명</p>
-                            <p>삼품명삼품명삼품명삼품명삼품삼품명삼dddd품명</p>
-                        </div>
-                        <div class="main__brand__thumbnail__desc__price">
-                            <p>98,500만원</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </section>
-        <nav class="brand__pagenation" aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">이전</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">다음</a>
-                </li>
-            </ul>
-        </nav>
-    </main>
-    </section>
+			<!-- 검색 결과 -->
+			<div class="main__brand__imgwrap">
+				<p>검색 결과 N개</p>
+				<a th:each="brand : ${brand}" class="main__brand__thumbnail"
+					href="#"> <img th:src="${brand.brandImagePath}"
+					alt="Brand Image" />
+					<div class="main__brand__thumbnail__desc">
+						<div class="main__brand__thumbnail__desc__title">
+							<p th:text="${brand.brandname}">브랜드명</p>
+							<p th:text="${brand.productName}">제품명</p>
+						</div>
+						<div class="main__brand__thumbnail__desc__price">
+							<p th:text="${brand.brandPrice}">98,500만원</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</section>
+
+		<!-- 페이지네이션 -->
+		<nav class="brand__pagenation" aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled"><a class="page-link" href="#"
+					tabindex="-1">이전</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">4</a></li>
+				<li class="page-item"><a class="page-link" href="#">5</a></li>
+				<li class="page-item"><a class="page-link" href="#">다음</a></li>
+			</ul>
+		</nav>
+	</main>
+</section>
 
 </html>

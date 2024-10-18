@@ -28,10 +28,7 @@ public class Brand {
     
     private String brandname;           
     
-    @Column(name="brandDescription")
-    private String brandDescription;
-    
-    @Column(name="brandImagePath")
+    @Column(name="brandImagePath", columnDefinition = "TEXT")
     private String brandImagePath;
     
     @Column(name="brandPrice")
@@ -41,7 +38,7 @@ public class Brand {
     private int brandAgeGroup;  
     
     @Column(name="productName")
-    private int productName;   
+    private String productName;   
     
     @CreationTimestamp
     @Column(updatable = false)
