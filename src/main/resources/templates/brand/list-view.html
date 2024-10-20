@@ -23,7 +23,7 @@
 				</div>
 
 				<!-- 연령대 -->
-				<section class="main__brand__choice">
+				<section class="main__brand__choice" id="ageFilter" name="age">
 					<div id="main__brand__category">
 						<p>연령대</p>
 						<div class="main__brand__option">
@@ -31,69 +31,71 @@
 							<p>전체</p>
 						</div>
 						<div class="main__brand__option">
-							<input type="radio" name="age" value="10대">
+							<input type="radio" name="age" value="10">
 							<p>10대</p>
 						</div>
 						<div class="main__brand__option">
-							<input type="radio" name="age" value="20대">
+							<input type="radio" name="age" value="20">
 							<p>20대</p>
 						</div>
 						<div class="main__brand__option">
-							<input type="radio" name="age" value="30대">
+							<input type="radio" name="age" value="30">
 							<p>30대</p>
 						</div>
 						<div class="main__brand__option">
-							<input type="radio" name="age" value="40대">
+							<input type="radio" name="age" value="40">
 							<p>40대</p>
 						</div>
 						<div class="main__brand__option">
-							<input type="radio" name="age" value="50대">
+							<input type="radio" name="age" value="50">
 							<p>50대</p>
 						</div>
 					</div>
 
 					<!-- 브랜드 -->
-					<div id="main__brand__category2">
+					<div class="main__brand__category2" id="brandFilter">
 						<p>브랜드</p>
 						<div class="main__brand__option2">
 							<input type="radio" name="brand" value="전체" checked>
 							<p>전체</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="루이비통">
+							<input type="radio" name="brand" value="Louis Vuitton">
 							<p>루이비통(Louis Vuitton)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="샤넬">
+							<input type="radio" name="brand" value="Chanel">
 							<p>샤넬(Chanel)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="에르메스">
-							<p>에르메스(Hermès)</p>
+							<input type="radio" name="brand" value="Prada">
+							<p>프라다</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="구찌">
-							<p>구찌(Gucci)</p>
+							<input type="radio" name="brand" value="Comme des Garçons">
+							<p>꼼데가르송(Comme des Garçons)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="디올">
-							<p>디올(Dior)</p>
+							<input type="radio" name="brand" value="Saint Laurent">
+							<p>입생로랑(Saint Laurent)</p>
 						</div>
 					</div>
 
 					<!-- 가격 -->
 					<div class="main__price__slider">
-						<p class="">가격</p>
-						<input type="range" id="priceRange" min="0" max="1000" value="0"
-							step="100"> <label for="priceRange">가격 범위: <span
-							id="priceValue">1000만원</span></label>
+						<p>가격</p>
+						<input type="range" id="priceRange" min="0" max="10000000"
+							value="0" step="1000000"> <label for="priceRange">가격
+							범위: <span id="priceValue">0만원</span>
+						</label>
 					</div>
+
 				</section>
 			</div>
 
 			<!-- 검색 결과 -->
-			<div class="main__brand__imgwrap">
-				<p>검색 결과 N개</p>
+			<div id="brandList" class="main__brand__imgwrap">
+				<p th:text="${brand != null ? '전체 ' + brand.size() + '개' : '전체 0개'}"></p>
 				<a th:each="brand : ${brand}" class="main__brand__thumbnail"
 					href="#"> <img th:src="${brand.brandImagePath}"
 					alt="Brand Image" />
@@ -103,7 +105,7 @@
 							<p th:text="${brand.productName}">제품명</p>
 						</div>
 						<div class="main__brand__thumbnail__desc__price">
-							<p th:text="${brand.brandPrice}">98,500만원</p>
+							<p th:text="${#numbers.formatInteger(brand.brandPrice, 3, 'COMMA')} + '원'">98,500원</p>
 						</div>
 					</div>
 				</a>
@@ -125,5 +127,65 @@
 		</nav>
 	</main>
 </section>
+
+<script layout:fragment="script">
+$(document).ready(function() {
+    const priceRange = $('#priceRange');
+    const priceValue = $('#priceValue');
+
+    // 가격 범위 표시 : 100만원 , 200만원
+    priceRange.on('input', function() {
+    	   priceValue.text((priceRange.val() / 10000) + '만원');
+    });
+
+    // 연령대 및 브랜드 라디오 버튼에서 변경 이벤트
+    $('input[name="age"], input[name="brand"], #priceRange').on('change', function() {
+        const age = $('input[name="age"]:checked').val(); 
+        const brand = $('input[name="brand"]:checked').val(); 
+        
+        const maxPrice = priceRange.val(); // 선택된 최대 가격
+
+        // AJAX 요청으로 필터링된 브랜드 리스트 가져오기
+        $.ajax({
+            url: '/brand/filterList', // 수정된 경로
+            method: 'GET',
+            data: {
+                age: age,
+                brand: brand,
+                maxPrice: maxPrice // 이 부분에서 minPrice 제거
+            },
+            success: function(data) {
+                console.log('필터링된 브랜드 리스트:', data);
+
+                const brandListContainer = $('#brandList'); 
+                brandListContainer.empty();
+                brandListContainer.append(`<p>전체 ${data.length}개</p>`);
+
+                data.forEach(brand => {
+                    const brandItem = `
+                        <a class="main__brand__thumbnail" href="#">
+                            <img src="${brand.brandImagePath}" alt="Brand Image" />
+                            <div class="main__brand__thumbnail__desc">
+                                <div class="main__brand__thumbnail__desc__title">
+                                    <p>${brand.brandname}</p>
+                                    <p>${brand.productName || '제품명 없음'}</p>
+                                </div>
+                                <div class="main__brand__thumbnail__desc__price">
+                                    <p>${brand.brandPrice.toLocaleString()} 원</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    brandListContainer.append(brandItem); 
+                });
+            },
+            error: function(error) {
+                console.error('오류 발생:', error);
+            }
+        });
+    });
+
+});
+</script>
 
 </html>

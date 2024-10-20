@@ -174,7 +174,7 @@
 
 /*--------------------- */
 
-.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 {
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice .main__brand__category2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -184,12 +184,12 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2>p {
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice .main__brand__category2>p {
     font-size: 1.2em;
     margin-bottom: 10px;
 }
 
-.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 .main__brand__option2 {
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice .main__brand__category2 .main__brand__option2 {
     padding-top: 14px;
     padding-bottom: 10px;
     display: inline-flex;
@@ -197,7 +197,7 @@
     font-size: 1em;
 }
 
-.main__wrap .main__wrap__brand .main__filter .main__brand__choice #main__brand__category2 .main__brand__option2>input {
+.main__wrap .main__wrap__brand .main__filter .main__brand__choice .main__brand__category2 .main__brand__option2>input {
     margin-right: 10px;
 }
 
@@ -348,7 +348,7 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 .main__wrap .main__wrap__brand .main__brand__imgwrap .main__brand__thumbnail>img {
-    object-fit: cover;
+    width : 240px;
     max-height: 240px;
     border-radius: 12px;
 }

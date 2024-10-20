@@ -46,4 +46,6 @@ public class Brand {
     
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+
 }
