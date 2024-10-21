@@ -6,16 +6,18 @@ import com.luxre.relux.brand.domain.Brand;
 
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
-    // 브랜드 이름으로 리스트 가져오기
+	// 브랜드 이름으로 리스트 가져오기 // ex) 나이: 전체 또는 특정 연령대, 브랜드: 구찌, 샤넬 등
     List<Brand> findByBrandname(String brandname);
     
-    // 브랜드 이름과 가격으로 필터링
-    List<Brand> findByBrandnameAndBrandPriceLessThanEqual(String brandname, int maxPrice);
+    // 나이, 브랜드 이름, 가격 조건으로 필터링 // ex) 나이: 10대, 브랜드: 샤넬, 가격: 100만원 이상
+    List<Brand> findByBrandAgeGroupAndBrandnameAndBrandPriceGreaterThanEqual(int brandAgeGroup, String brand, int maxPrice);
     
-    // 나이와 브랜드이름과 가격 필터링
-    List<Brand> findByBrandAgeGroupAndBrandnameAndBrandPriceGreaterThanEqual(int brandAgeGroup, String brand, int maxprice);
-
+    // 나이와 가격으로 필터링 // ex) 나이: 10대, 브랜드: 전체, 가격: 100만원 이상
+    List<Brand> findByBrandAgeGroupAndBrandPriceGreaterThanEqual(int brandAgeGroup, int maxPrice);
     
-    // 조건걸고 다시 전체 골랐을때 리스트 필터링
-	List<Brand> findByBrandAgeGroupAndBrandPriceGreaterThanEqual(int brandAgeGroup, int maxPrice);
+    // 연령대와 관계없이 가격 조건으로 필터링 // ex) 가격: 100만원 이상
+    List<Brand> findByBrandPriceGreaterThanEqual(int maxPrice);
+    
+    // 특정 브랜드 이름과 가격 조건으로 필터링 // ex) 브랜드: 구찌, 가격: 100만원 이상
+    List<Brand> findByBrandnameAndBrandPriceGreaterThanEqual(String brand, int maxPrice);
 }

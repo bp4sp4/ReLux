@@ -142,17 +142,15 @@ $(document).ready(function() {
     $('input[name="age"], input[name="brand"], #priceRange').on('change', function() {
         const age = $('input[name="age"]:checked').val(); 
         const brand = $('input[name="brand"]:checked').val(); 
-        
-        const maxPrice = priceRange.val(); // 선택된 최대 가격
+        const maxPrice = priceRange.val(); 
 
-        // AJAX 요청으로 필터링된 브랜드 리스트 가져오기
         $.ajax({
-            url: '/brand/filterList', // 수정된 경로
+            url: '/brand/filterList', 
             method: 'GET',
             data: {
                 age: age,
                 brand: brand,
-                maxPrice: maxPrice // 이 부분에서 minPrice 제거
+                maxPrice: maxPrice
             },
             success: function(data) {
                 console.log('필터링된 브랜드 리스트:', data);
@@ -161,6 +159,7 @@ $(document).ready(function() {
                 brandListContainer.empty();
                 brandListContainer.append(`<p>전체 ${data.length}개</p>`);
 
+                // forEach() 화살표함수 사용                 
                 data.forEach(brand => {
                     const brandItem = `
                         <a class="main__brand__thumbnail" href="#">
