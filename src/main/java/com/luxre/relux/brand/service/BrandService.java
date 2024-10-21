@@ -24,11 +24,13 @@ public class BrandService {
     public List<Brand> getFilteredBrands(String age, String brand, int maxPrice) {
         System.out.println("나이 : " + age + ", 브랜드 : " + brand + ", 최대 가격 : " + maxPrice);
         
-        // 나이와 브랜드가 모두 "전체"일 경우, 최대 가격에 맞는 전체 브랜드 리스트 출력
+        // 나이와 브랜드가 모두 전체일 경우, 최대 가격에 맞는 전체 브랜드 리스트 출력
         if ("전체".equals(age) && "전체".equals(brand)) {
             return brandRepository.findByBrandPriceGreaterThanEqual(maxPrice);
         }
-        if ("전체".equals(age) && "전체".equals(brand)) {
+        
+        // 이것만안됨 --> 나이 : 전체  브랜드 : 구찌 ,샤넬 등등 가격 변동에따른 리스트 출력
+        if ("전체".equals(age)) {
         	 return brandRepository.findByBrandnameAndBrandPriceGreaterThanEqual(brand, maxPrice);
         }
 
