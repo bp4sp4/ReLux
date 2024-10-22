@@ -1,7 +1,12 @@
 package com.luxre.relux.user.service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
 import com.luxre.relux.common.HashingEncoder;
 import com.luxre.relux.user.domain.User;
 import com.luxre.relux.user.repository.UserRepository;
@@ -10,11 +15,13 @@ import com.luxre.relux.user.repository.UserRepository;
 public class UserService {
     private UserRepository userRepository;
     private HashingEncoder encoder;
+    private JavaMailSender mailSender;
 
     public UserService(UserRepository userRepository,
-                       @Qualifier("sha256Hashing") HashingEncoder encoder) {
+                       @Qualifier("sha256Hashing") HashingEncoder encoder, JavaMailSender mailSender) {
         this.userRepository = userRepository;
         this.encoder = encoder;
+        this.mailSender = mailSender;
     }
 
     public boolean isDuplicateId(String loginId) {
@@ -55,5 +62,51 @@ public class UserService {
         } else {
             return "Unknown";
         }
+    }
+    
+    public void sendId(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (user != null) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("리럭스 : 로그인 아이디를 메일로 보내드려요.");
+            message.setText("당신의 아이디는: " + user.getLoginId());
+            mailSender.send(message);
+        } else {
+            throw new IllegalArgumentException("이메일에 해당하는 사용자 아이디가 없습니다.");
+        }
+    }
+    
+    public void sendPassword(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            throw new IllegalArgumentException("이메일에 해당하는 사용자가 없습니다.");
+        }
+
+        String temporaryPassword = RandomPassword();
+        String encryptedPassword = encoder.encode(temporaryPassword);
+        
+        // DB에 임시 비밀번호 업데이트
+        userRepository.updatePassword(user.getId(), encryptedPassword);
+
+        // 이메일로 전송
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("리럭스 : 임시 비밀번호 발송");
+        message.setText("당신의 임시 비밀번호는: " + temporaryPassword);
+        mailSender.send(message);
+    }
+
+    // 임시 비밀번호 생성
+    private String RandomPassword() {
+        int length = 8; //  8자리 임시 비밀번호 길이
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuilder temporaryPassword = new StringBuilder(length);
+        
+        for (int i = 0; i < length; i++) {
+            temporaryPassword.append(chars.charAt(random.nextInt(chars.length())));
+        }
+        return temporaryPassword.toString();
     }
 }

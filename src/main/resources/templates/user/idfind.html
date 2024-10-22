@@ -3,27 +3,51 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
 </head>
 <body>
-  <section layout:fragment="contents">
+    <section layout:fragment="contents">
         <div class="wrap">
-            <div class="wrap__interface">
-                <div class="wrap__interface__login">
-                    <h1 class="login__title">아이디찾기</h1>
-                    <form id="loginForm">
-                        <div class="textbox">
-                            <label class="textbox__subtitle">이메일</label>
-                            <input type="text" placeholder="abce@relux.com" required id="loginInput">
-                        </div>
-                        <button type="submit" class="btn" id="idfind">아이디 찾기</button>
-                    </form>
-                      <div class="message">
-                        <p>계정이 있으신가요? <a href="/user/login-view">로그인</a></p>
+            <div class="wrap__interface__login">
+                <h1 class="login__title">아이디찾기</h1>
+                <form id="loginForm" method="post" action="/user/find-id">
+                    <div class="textbox">
+                        <label class="textbox__subtitle">이메일</label>
+                        <input type="email" placeholder="abce@relux.com" required name="email">
                     </div>
+                    <button type="submit" class="btn" id="loginBtn">아이디 찾기</button>
+                </form>
+
+                <div class="message">
+                    <p>
+                        계정이 있으신가요? <a href="/user/login-view">로그인</a>
+                    </p>
+                    <p th:if="${result == 'fail'}">이메일을 다시 확인해주세요.</p>
                 </div>
             </div>
         </div>
     </section>
+    
+      <script layout:fragment="script">
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(event) {
+                event.preventDefault();
+                const email = $('input[name="email"]').val();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/user/find-id',
+                    data: { email: email },
+                    success: function(response) {
+                        window.location.href = '/user/idfind-successview';
+                    },
+                    error: function() {
+                        alert("아이디찾기 에러");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

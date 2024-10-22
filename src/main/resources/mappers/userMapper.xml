@@ -65,5 +65,20 @@
         WHERE 
         	`id` = #{id}
 </select>
-  
+
+<select id="findUserByEmail" parameterType="String" resultType="com.luxre.relux.user.domain.User">
+    SELECT 
+        `id`, `loginId`, `password`, `name`, `email`, `createdAt`, `updatedAt`
+    FROM 
+        `user`
+    WHERE 
+        `email` = #{email}
+</select>
+
+<update id="updatePassword" parameterType="map">
+    UPDATE `user`
+    SET `password` = #{password}
+    WHERE `id` = #{id}
+</update>
+
 </mapper>

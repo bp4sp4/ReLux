@@ -2,6 +2,8 @@ package com.luxre.relux.user;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,5 +111,32 @@ public class UserRestController {
 
 	        return response;
 	    }
+	 
+	 
+	 @PostMapping("/find-id")
+	 public String findId(@RequestParam("email") String email, Model model) {
+	     try {
+	         userService.sendId(email);
+	         return "redirect:/user/idfind-successview"; 
+	     } catch (IllegalArgumentException e) {
+	         model.addAttribute("result", "fail");
+	         model.addAttribute("errorMessage", e.getMessage());
+	         return "/user/idfind-view"; 
+	     }
+	 }
+	 
+	 @PostMapping("/find-password")
+	 public String findPassword(@RequestParam("email") String email, Model model) {
+	     try {
+	         userService.sendPassword(email);
+	         return "redirect:/user/pwfind-successview"; 
+	     } catch (IllegalArgumentException e) {
+	         model.addAttribute("result", "fail");
+	         model.addAttribute("errorMessage", e.getMessage());
+	         return "/user/pwfind-view"; 
+	     }
+	 }
 
 }
+
+
