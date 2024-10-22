@@ -1,6 +1,7 @@
 package com.luxre.relux.post.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	// 페이징
 	Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
 	
+	public Optional<Post> findById(int id);
 }

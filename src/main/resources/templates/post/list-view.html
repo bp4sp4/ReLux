@@ -18,9 +18,9 @@
 			</div>
 			<!--글의 리스트들 -->
 			<div class="post__wrap__content">
-				<ul class="post__wrap__list">
+			<ul class="post__wrap__list">
 					<li class="post__wrap__items" th:each="post : ${posts}"><a
-						th:href="@{/post/detail-view/{id}(id=${post.postId})}"
+						th:href="@{/post/detail-view/{id}(id=${post.id})}"
 						class="post__wrap__list_link"> <img
 							th:src="${post.imagePath != null && !post.imagePath.isEmpty() ? post.imagePath : '/static/images/noimages.avif'}"
 							alt="게시글 이미지" class="post__image" />

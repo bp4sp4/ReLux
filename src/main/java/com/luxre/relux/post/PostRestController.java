@@ -1,5 +1,6 @@
 package com.luxre.relux.post;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.luxre.relux.common.FileManager;
 import com.luxre.relux.post.domain.Post;
 import com.luxre.relux.post.service.PostService;
-
 
 import jakarta.servlet.http.HttpSession;
 
@@ -74,5 +75,55 @@ public class PostRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultMap);
         }
     }
+    
+    
+    @PostMapping("/update")
+    public Map<String, String> updatePost(@RequestBody Map<String, String> requestData) {
+        String postIdString = requestData.get("postId");
+        if (postIdString == null || postIdString.isEmpty()) {
+            throw new IllegalArgumentException("postId must not be null or empty");
+        }
+        
+        int postId = Integer.parseInt(postIdString);
+        String title = requestData.get("title");
+        String contents = requestData.get("contents");
+        String imagePath = requestData.get("imagePath");
+        postService.updatePost(postId, title, contents, imagePath);
+        
+        Post existingPost = postService.getPostById(postId);
+        if (existingPost == null) {
+            throw new IllegalArgumentException("게시물이 존재하지 않습니다.");
+        }
+
+        // 게시물 업데이트
+        postService.updatePost(postId, title, contents, imagePath); // 반환값 필요 없음
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("result", "success");
+        return resultMap; // 성공 응답
+    }
+    
+    @PostMapping("/delete")
+    public Map<String, String> deletePost(
+            @RequestParam("postId") int postId,
+            HttpSession session) {
+        
+        // 로그인된 사용자 정보 가져오기 (세션에서 userId 추출)
+        int userId = (Integer) session.getAttribute("userId");
+
+        // 게시글 삭제 처리
+        boolean isDeleted = postService.deletePost(postId, userId);
+
+        // 응답 맵 구성
+        Map<String, String> resultMap = new HashMap<>();
+        if (isDeleted) {
+            resultMap.put("result", "success");
+        } else {
+            resultMap.put("result", "fail");
+        }
+        return resultMap; // 삭제 결과 반환
+    }
+
+
+
 }
 

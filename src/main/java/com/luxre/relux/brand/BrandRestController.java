@@ -28,5 +28,7 @@ public class BrandRestController {
 
         return brandService.getFilteredBrands(age, brand, maxPrice);
     }
+    
+    
 
 }

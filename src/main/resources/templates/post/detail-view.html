@@ -7,33 +7,54 @@
 <meta charset="UTF-8">
 <title>게시글 상세</title>
 </head>
+
 <body>
 	<section layout:fragment="contents">
 		<main class="post__wrap__detail">
-			<!--수정,삭제,목록 버튼 -->
+			<!-- 수정, 삭제, 목록 버튼 -->
 			<div class="post__wrap__commonBtn">
-				<a href="/post/list-view" class="post__wrap__detail__list">목록</a> <a
-					href="" class="post__wrap__detail__modify">수정</a> <a href=""
+				<a href="/post/list-view" class="post__wrap__detail__list">목록</a>
+				<!-- 현재 로그인한 사용자와 게시글 작성자가 같을 때만 수정/삭제 버튼이 표시되도록 -->
+				<a th:if="${session.userId == post.userId}"
+					th:href="@{/post/update-view/{id}(id=${post.id})}"
+					class="post__wrap__detail__modify">수정</a> <a href="#"
+					th:if="${session.userId == post.userId}"
+					th:onclick="'deletePost(' + ${post.id} + ')'"
 					class="post__wrap__detail__delete">삭제</a>
+
+
+
 			</div>
+
 			<!-- 글의 상단 영역 -->
 			<div class="post__wrap__info">
-				<h1 class="post__wrap__info__title" th:text="${post.title}">[구찌]
-					이건 찐이야 진짜</h1>
+				<h1 class="post__wrap__info__title" th:text="${post.title}">제목이
+					없습니다</h1>
+
 				<div class="post__wrap__info__sellerinfo">
-					<div class="post__wrap__info__seller" th:text="${user.name}">진품판매자</div>
+					<div class="post__wrap__info__seller" th:text="${user.name}">판매자
+						정보가 없습니다</div>
 					<div class="post__wrap__info__time"
-						th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">2024-09-10
-						20:33</div>
+						th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">
+						작성 시간이 없습니다</div>
 					<div class="post__wrap__info__viewer">조회수: 5</div>
 				</div>
-				<img th:src="${post.imagePath}" />
-				<div class="post__wrap__content" th:text="${cleanedContents}">이건
-					너무 찐이야!!</div>
+
+				<!-- 이미지 경로가 null인 경우 처리 -->
+				<img th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}"
+					alt="게시글 이미지" />
+
+
+
+				<!-- 게시글 내용 -->
+				<div class="post__wrap__content" th:text="${cleanedContents}">내용이
+					없습니다</div>
 			</div>
-			<!--  글의 댓글 영역 -->
+
+			<!-- 글의 댓글 영역 -->
 			<div class="post__wrap__reply">
 				<ul class="post__wrap__reply__list">
+					<!-- Sample 댓글 항목들 -->
 					<li class="post__wrap__reply__items">
 						<div class="post__wrap__replyer">
 							<span>구찌사요</span>
@@ -43,35 +64,50 @@
 							<a href="" class="reply__update">수정</a> <a href=""
 								class="reply__delete">삭제</a>
 						</div>
-						<div class="post__wrap__reply__items__contents">제2항의 재판관중
-							3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다. 정당은 법률이 정하는 바에 의하여 국가의
-							보호를 받으며, 국가는 법률이 정하는 바에 의하여 정당운영에 필요한 자금을 보조할 수 있다.</div>
-					</li>
-					<li class="post__wrap__reply__items">
-						<div class="post__wrap__replyer">
-							<span>구찌사요</span>
-							<div class="post__wrap__replyer__time">2024-10-11 19:24:01</div>
-						</div>
-						<div class="post__wrap__reply__items__btn">
-							<a href="" class="reply__update">수정</a> <a href=""
-								class="reply__delete">삭제</a>
-						</div>
-						<div class="post__wrap__reply__items__contents">제2항의 재판관중
-							3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다. 정당은 법률이 정하는 바에 의하여 국가의
-							보호를 받으며, 국가는 법률이 정하는 바에 의하여 정당운영에 필요한 자금을 보조할 수 있다.</div>
+						<div class="post__wrap__reply__items__contents">댓글 내용</div>
 					</li>
 				</ul>
+
+				<!-- 댓글 작성 영역 -->
 				<div class="post__wrap__reply__article">
-					<textarea cols="30" rows="10" readonly>
-로그인했을때 : 댓글작성가능 
+					<textarea cols="30" rows="10" placeholder="로그인 후 댓글 작성이 가능합니다"
+						readonly>
+로그인했을때 : 댓글작성가능
 비로그인시 멘트내용 : 로그인 후 댓글 작성이 가능합니다 -> 로그인 화면으로 이동
-            </textarea>
+					</textarea>
 					<div class="post__wrap__reply__confirm">
-						<a href="">등록</a>
+						<a href="#">등록</a>
 					</div>
 				</div>
 			</div>
 		</main>
 	</section>
+
+	<script layout:fragment="script">
+		function deletePost(postId) {
+			if (confirm("정말로 삭제하시겠습니까?")) {
+				// AJAX로 삭제 요청 전송
+				$.ajax({
+					type : "POST",
+					url : `/post/delete?postId=${postId}`,
+					contentType : 'application/json',
+					success : function(response) {
+						if (response.result === "success") {
+							alert("게시물이 성공적으로 삭제되었습니다.");
+							// 삭제 성공 시 목록 페이지로 리다이렉트
+							window.location.href = "/post/list-view";
+						} else {
+							alert("삭제 실패: 권한이 없습니다.");
+						}
+					},
+					error : function() {
+						alert("삭제 중 에러 발생!");
+					}
+				});
+			}
+		}
+	</script>
+
 </body>
+
 </html>
