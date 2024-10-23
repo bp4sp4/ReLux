@@ -1,9 +1,11 @@
-package com.luxre.relux.post.domain;
+package com.luxre.relux.comment.domain;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.luxre.relux.post.domain.Post;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,30 +24,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name="post")
+@Table(name="Comment")
 @Entity
-public class Post {
+public class Comment {
+
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="userId")
-	private int userId;
+	@Column(name="postId")
+	private int postId;
 	
-	private String title;
-    private String contents;
-    
-	@Column(name="imagePath")
-	private String imagePath;
-    
-    @CreationTimestamp
+	@Column(name="userId")
+	private int userID;
+	
+	private String contents;
+	
+	@CreationTimestamp
 	@Column(name="createdAt")
 	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp
 	@Column(name="updatedAt")
 	private LocalDateTime updatedAt;
-
-	@Column(name = "views")
-	private int views;
 }

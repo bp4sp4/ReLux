@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.luxre.relux.post.domain.Post;
 
@@ -17,4 +18,10 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
 	
 	public Optional<Post> findById(int id);
+	
+	@Query(value = "SELECT p, COUNT(pv.id) AS viewCount " +
+            "FROM Post p LEFT JOIN PostView pv ON p.id = pv.postId " +
+            "GROUP BY p.id ORDER BY viewCount DESC")
+	List<Object[]> findTopPostsWithViewCount(Pageable pageable);
+
 }

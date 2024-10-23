@@ -1,11 +1,156 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/default}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>중고 마켓 글 수정</title>
 </head>
+
 <body>
+    <section layout:fragment="contents">
+        <main class="post__write__wrap">
+            <div class="post__write__container">
+                <h1 class="post__write__title">중고 마켓 글 수정</h1>
+                <div class="post__wrap__register">
+                    <button id="updateBtn" class="post_wrap__registerBtn">수정</button>
+                </div>
+            </div>
+            <div>
+                <div class="input-container">
+                    <input id="titleInput" required type="text" 
+                           th:value="${post.title}" 
+                           placeholder="제목을 입력하세요." class="form-control" />
+                </div>
+                <textarea class="contentsInput" id="summernote" name="editordata" 
+                          th:text="${post.contents}"></textarea>
+            </div>
+        </main>
+        <input type="hidden" id="postId" th:value="${post.id}">
+        
+    </section>
+    
+
+   <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>중고 마켓 글 수정</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.css">
+</head>
+
+<body>
+    <section layout:fragment="contents">
+        <main class="post__write__wrap">
+            <div class="post__write__container">
+                <h1 class="post__write__title">중고 마켓 글 수정</h1>
+                <div class="post__wrap__register">
+                    <button id="updateBtn" class="post_wrap__registerBtn">수정</button>
+                </div>
+            </div>
+            <div>
+                <div class="input-container">
+                    <input id="titleInput" required type="text" 
+                           th:value="${post.title}" 
+                           placeholder="제목을 입력하세요." class="form-control" />
+                </div>
+                <textarea class="contentsInput" id="summernote" name="editordata" 
+                          th:text="${post.contents}"></textarea>
+            </div>
+            <input type="hidden" id="postId" th:value="${post.id}">
+           
+        </main>
+    </section>
+    
+
+ <script layout:fragment="script">
+$(document).ready(function() {
+    const postId = $('#postId').val();
+    console.log("postId:", postId);
+
+    // 기존 이미지 경로를 Thymeleaf 변수를 사용하여 초기화합니다.
+    const existingImagePath = /*[[${post.imagePath}]]*/ ''; // 기존 이미지 경로
+
+    let uploadedImagePath = ''; // 새로 업로드한 이미지 경로 저장 변수
+
+    $('#summernote').summernote({
+        height: 500,
+        placeholder: '내용을 입력하세요.',
+        lang: 'ko-KR',
+        callbacks: {
+            onImageUpload: function(files) {
+                for (let i = 0; i < files.length; i++) {
+                    uploadImage(files[i]);
+                }
+            }
+        }
+    });
+
+    function uploadImage(file) {
+        let data = new FormData();
+        data.append("file", file);
+        $.ajax({
+            url: '/post/upload-image',
+            type: 'POST',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                // 서버에서 이미지 URL을 반환받아 저장
+                uploadedImagePath = response.imageUrl; // 새 이미지 경로 저장
+                $('#summernote').summernote('insertImage', uploadedImagePath);
+            },
+            error: function() {
+                alert('이미지 업로드 실패');
+            }
+        });
+    }
+
+    $('#updateBtn').on('click', function() {
+        const title = $('#titleInput').val();
+        const contents = $('#summernote').val();
+
+        // 입력 값 검증
+        if (!title || !contents) {
+            alert("제목과 내용을 입력해주세요.");
+            return;
+        }
+
+        // 새 이미지 경로가 없으면 기존 이미지 경로 사용
+        const imagePath = uploadedImagePath || existingImagePath; 
+
+        // AJAX 요청으로 게시물 업데이트
+        $.ajax({
+            url: '/post/update', // POST 요청 URL
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                postId: postId,
+                title: title,
+                contents: contents,
+                imagePath: imagePath 
+            }),
+            success: function(response) {
+                if (response.result === "success") {
+                    alert("게시물이 성공적으로 수정되었습니다.");
+                    window.location.href = '/post/list-view'; // 성공 시 페이지 리다이렉트
+                } else {
+                    alert("게시물 수정에 실패했습니다: " + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+            }
+        });
+    });
+});
+</script>
+
 
 </body>
 </html>

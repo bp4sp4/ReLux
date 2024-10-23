@@ -1,5 +1,7 @@
 package com.luxre.relux.post;
 
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
@@ -8,15 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.luxre.relux.comment.dto.CommentDto;
+import com.luxre.relux.comment.service.CommentService;
 import com.luxre.relux.post.domain.Post;
 import com.luxre.relux.post.dto.PostDto;
 import com.luxre.relux.post.service.PostService;
 import com.luxre.relux.user.domain.User;
 import com.luxre.relux.user.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @Controller
@@ -24,10 +29,12 @@ public class PostController {
 
 	private final PostService postService;
 	private final UserService userService;
+	private CommentService commentService;
 
-	public PostController(PostService postService, UserService userService) {
+	public PostController(PostService postService, UserService userService, CommentService commentService) {
 		this.postService = postService;
 		this.userService = userService;
+		this.commentService = commentService;
 	}
 
 	@GetMapping("/list-view")
@@ -59,9 +66,10 @@ public class PostController {
 	}
 
 	@GetMapping("/detail-view/{id}")
-	public String postDetail(@PathVariable("id") int id, Model model) {
+	public String postDetail(@PathVariable("id") int id, Model model, HttpSession session) {
+		 int userId = (Integer) session.getAttribute("userId");
 		// 게시글 정보 가져오기
-		Post post = postService.getPostDetail(id);
+		Post post = postService.getPostDetail(id, userId);
 
 		// 사용자 정보 가져오기
 		User user = userService.getUserById(post.getUserId());
@@ -70,23 +78,25 @@ public class PostController {
 		// 순수한 텍스트만, 줄바꿈 필요없음
 		String cleanedContents = Jsoup.clean(post.getContents(), "", Whitelist.none(),
 				new Document.OutputSettings().prettyPrint(false));
+		
+		 long viewCount = postService.getPostViewCount(id);
+		
+		List<CommentDto> comments = commentService.getComment(id);
 
 		// 모델에 게시글과 사용자 정보를 추가
 		model.addAttribute("post", post);
 		model.addAttribute("user", user);
 		model.addAttribute("cleanedContents", cleanedContents);
+		model.addAttribute("comments", comments);
+		model.addAttribute("viewCount", viewCount);
 
 		return "post/detail-view";
 	}
 	
 	@GetMapping("/update-view/{id}")
-	public String showUpdateView(@PathVariable("id") int id, Model model) {
+	public String updateView(@PathVariable("id") int id, Model model) {
 	    Post post = postService.getPostById(id);
-	    
-	    if (post == null) {
-	        return "redirect:/post/list"; // 게시물이 없을 경우
-	    }
-	    
+	  
 	    String userName = userService.getUserNameById(post.getUserId());
 	    PostDto postDto = new PostDto(
 	        post.getId(), 
@@ -94,10 +104,11 @@ public class PostController {
 	        post.getContents(),
 	        post.getImagePath(),
 	        userName
+	        
 	    );
 	    
 	    model.addAttribute("post", postDto);
-	    return "post/modify-view"; // 수정 뷰로 이동
+	    return "post/modify-view";
 	}
 
 

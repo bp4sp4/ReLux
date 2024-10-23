@@ -4,110 +4,136 @@
 	layout:decorate="~{layouts/default}">
 
 <head>
-<meta charset="UTF-8">
-<title>게시글 상세</title>
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
+    <script>
+        // userId를 Thymeleaf에서 가져와서 JavaScript 변수로 설정
+        var userId = /*[[${session.userId}]]*/ null; // 세션에서 userId를 가져옵니다.
+    </script>
 </head>
 
 <body>
-	<section layout:fragment="contents">
-		<main class="post__wrap__detail">
-			<!-- 수정, 삭제, 목록 버튼 -->
-			<div class="post__wrap__commonBtn">
-				<a href="/post/list-view" class="post__wrap__detail__list">목록</a>
-				<!-- 현재 로그인한 사용자와 게시글 작성자가 같을 때만 수정/삭제 버튼이 표시되도록 -->
-				<a th:if="${session.userId == post.userId}"
-					th:href="@{/post/update-view/{id}(id=${post.id})}"
-					class="post__wrap__detail__modify">수정</a> <a href="#"
-					th:if="${session.userId == post.userId}"
-					th:onclick="'deletePost(' + ${post.id} + ')'"
-					class="post__wrap__detail__delete">삭제</a>
+    <section layout:fragment="contents">
+        <main class="post__wrap__detail">
+            <!-- 수정, 삭제, 목록 버튼 -->
+            <div class="post__wrap__commonBtn">
+                <a href="/post/list-view" class="post__wrap__detail__list">목록</a>
+                <a th:if="${session.userId == post.userId}"
+                   th:href="@{/post/update-view/{id}(id=${post.id})}"
+                   class="post__wrap__detail__modify">수정</a>
+                <a href="#"
+                   th:if="${session.userId == post.userId}"
+                   th:onclick="'deletePost(' + ${post.id} + ')'"
+                   class="post__wrap__detail__delete">삭제</a>
+            </div>
 
+            <!-- 글의 상단 영역 -->
+            <div class="post__wrap__info">
+                <h1 class="post__wrap__info__title" th:text="${post.title}">제목이 없습니다</h1>
+                <div class="post__wrap__info__sellerinfo">
+                    <div class="post__wrap__info__seller" th:text="${user.name}">판매자 정보가 없습니다</div>
+                    <div class="post__wrap__info__time" th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">작성 시간이 없습니다</div>
+                    <div class="post__wrap__info__viewer" th:text="'조회수: ' + ${viewCount}">조회수: 5</div>
+                </div>
+                <img th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}" alt="게시글 이미지" />
+                <div class="post__wrap__content" th:text="${cleanedContents}">내용이 없습니다</div>
+            </div>
 
+          <!-- 글의 댓글 영역 -->
+<div class="post__wrap__reply">
+    <ul class="post__wrap__reply__list">
+        <li th:each="comment : ${comments}" class="post__wrap__reply__items">
+            <div class="post__wrap__replyer">
+                <span th:text="${comment.userName}">작성자</span>
+                <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm:ss')}" class="post__wrap__replyer__time">2024-10-11 19:24:01</div>
+                <div class="post__wrap__reply__items__btn">
+                    <!-- 댓글 수정 버튼 -->
+                    <a href="#" class="reply__update" th:data-comment-id="${comment.id}" 
+                       th:if="${session.userId == comment.userId}">수정</a>
+                    <!-- 댓글 삭제 버튼 -->
+                    <a href="#" class="reply__delete" th:data-comment-id="${comment.id}"
+                       th:if="${session.userId == comment.userId}"
+                       th:onclick="'deleteComment(' + ${comment.id} + ', ' + ${session.userId} + ')'">삭제</a>
+                </div>
+            </div>
+            <div th:text="${comment.contents}" class="post__wrap__reply__items__contents">댓글 내용</div>
+        </li>
+    </ul>
 
-			</div>
+    <!-- 댓글 작성 영역 -->
+    <div class="post__wrap__reply__article">
+        <textarea id="commentContents" cols="30" rows="10" placeholder="로그인 후 댓글 작성이 가능합니다"
+            th:readonly="${session.userId == null}"></textarea>
+        <div class="post__wrap__reply__confirm">
+            <a href="#" id="createBtn" th:data-post-id="${post.id}">등록</a>
+        </div>
+    </div>
+</div>
+            </div>
+        </main>
+    </section>
 
-			<!-- 글의 상단 영역 -->
-			<div class="post__wrap__info">
-				<h1 class="post__wrap__info__title" th:text="${post.title}">제목이
-					없습니다</h1>
+    <script layout:fragment="script">
+        $(document).ready(function () {
+            // 댓글 등록 버튼 클릭 시
+            $('#createBtn').on('click', function () {
+                let postId = $(this).data('post-id');
+                let contents = $('#commentContents').val();
 
-				<div class="post__wrap__info__sellerinfo">
-					<div class="post__wrap__info__seller" th:text="${user.name}">판매자
-						정보가 없습니다</div>
-					<div class="post__wrap__info__time"
-						th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">
-						작성 시간이 없습니다</div>
-					<div class="post__wrap__info__viewer">조회수: 5</div>
-				</div>
+                if (contents.trim() === "") {
+                    alert("댓글 내용을 입력하세요");
+                    return;
+                }
 
-				<!-- 이미지 경로가 null인 경우 처리 -->
-				<img th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}"
-					alt="게시글 이미지" />
+                // AJAX로 댓글 작성 요청
+                $.ajax({
+                    type: "POST",
+                    url: "/comment/create",
+                    data: {
+                        postId: postId,
+                        contents: contents,
+                        userId: userId // userId 추가
+                    },
+                    success: function (response) {
+                        if (response.result === "success") {
+                            alert("댓글이 등록되었습니다.");
+                            location.reload(); // 페이지 새로고침
+                        } else {
+                            alert("댓글 작성 실패");
+                        }
+                    },
+                    error: function () {
+                        alert("댓글 작성 중 오류 발생!");
+                    }
+                });
+            });
 
-
-
-				<!-- 게시글 내용 -->
-				<div class="post__wrap__content" th:text="${cleanedContents}">내용이
-					없습니다</div>
-			</div>
-
-			<!-- 글의 댓글 영역 -->
-			<div class="post__wrap__reply">
-				<ul class="post__wrap__reply__list">
-					<!-- Sample 댓글 항목들 -->
-					<li class="post__wrap__reply__items">
-						<div class="post__wrap__replyer">
-							<span>구찌사요</span>
-							<div class="post__wrap__replyer__time">2024-10-11 19:24:01</div>
-						</div>
-						<div class="post__wrap__reply__items__btn">
-							<a href="" class="reply__update">수정</a> <a href=""
-								class="reply__delete">삭제</a>
-						</div>
-						<div class="post__wrap__reply__items__contents">댓글 내용</div>
-					</li>
-				</ul>
-
-				<!-- 댓글 작성 영역 -->
-				<div class="post__wrap__reply__article">
-					<textarea cols="30" rows="10" placeholder="로그인 후 댓글 작성이 가능합니다"
-						readonly>
-로그인했을때 : 댓글작성가능
-비로그인시 멘트내용 : 로그인 후 댓글 작성이 가능합니다 -> 로그인 화면으로 이동
-					</textarea>
-					<div class="post__wrap__reply__confirm">
-						<a href="#">등록</a>
-					</div>
-				</div>
-			</div>
-		</main>
-	</section>
-
-	<script layout:fragment="script">
-		function deletePost(postId) {
-			if (confirm("정말로 삭제하시겠습니까?")) {
-				// AJAX로 삭제 요청 전송
-				$.ajax({
-					type : "POST",
-					url : `/post/delete?postId=${postId}`,
-					contentType : 'application/json',
-					success : function(response) {
-						if (response.result === "success") {
-							alert("게시물이 성공적으로 삭제되었습니다.");
-							// 삭제 성공 시 목록 페이지로 리다이렉트
-							window.location.href = "/post/list-view";
-						} else {
-							alert("삭제 실패: 권한이 없습니다.");
-						}
-					},
-					error : function() {
-						alert("삭제 중 에러 발생!");
-					}
-				});
-			}
-		}
-	</script>
+            // 댓글 삭제 함수 정의
+            window.deleteComment = function(commentId, userId) {
+                if (confirm("댓글을 삭제하시겠습니까?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/comment/delete",
+                        data: {
+                            commentId: commentId,
+                            userId: userId 
+                        },
+                        success: function(response) {
+                            if (response.result === "success") {
+                                alert("댓글이 삭제되었습니다.");
+                                location.reload(); // 페이지 새로고침
+                            } else {
+                                alert("댓글 삭제 실패: " + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert("댓글 삭제 중 오류 발생!");
+                        }
+                    });
+                }
+            }
+        });
+    </script>
 
 </body>
-
 </html>

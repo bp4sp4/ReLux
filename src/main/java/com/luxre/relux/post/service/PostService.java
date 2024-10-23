@@ -12,18 +12,19 @@ import org.springframework.stereotype.Service;
 import com.luxre.relux.post.domain.Post;
 import com.luxre.relux.post.dto.PostDto;
 import com.luxre.relux.post.repository.PostRepository;
+import com.luxre.relux.postview.service.PostViewService;
 import com.luxre.relux.user.service.UserService;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
+    private final PostViewService postViewService;
 
-    public PostService(PostRepository postRepository, UserService userService) {
+    public PostService(PostRepository postRepository, UserService userService, PostViewService postViewService) {
         this.postRepository = postRepository;
         this.userService = userService;
+        this.postViewService = postViewService;
     }
 
     public List<PostDto> getPostListUserName() {
@@ -71,9 +72,17 @@ public class PostService {
     }
 
     // 특정 게시글 상세 정보 가져오기
-    public Post getPostDetail(int id) {
-        return postRepository.findById(id).orElse(null);
+    public Post getPostDetail(int id, int userId) {
+        Post post = postRepository.findById(id).orElse(null);
+        if (post != null) {
+            postViewService.addPostView(id, userId);
+            // 조회수 증가
+            post.setViews(post.getViews() + 1);
+            postRepository.save(post);
+        }
+        return post;
     }
+
 
     // 글 작성
     public Post addPost(int userId, String title, String contents, String imagePath) {
@@ -112,6 +121,10 @@ public class PostService {
             return true;
         }
         return false;
+    }
+
+    public long getPostViewCount(int postId) {
+        return postViewService.getPostViewCount(postId);
     }
 
 }

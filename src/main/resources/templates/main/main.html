@@ -1,202 +1,179 @@
 <!DOCTYPE html>
-<html lang="ko"  xmlns:th="http://www.thymeleaf.org" 
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/default}">
-        
-        
-<section layout:fragment="contents" >
-  
-      <!-------- 메인 영역 ---------->
-    <main class="main__wrap">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="/static/images/logo/Louisuitton.webp" alt="Slide 1" />
-                    <div class="swiper__title">올 겨울 신상</div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+2" alt="Slide 2" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+3" alt="Slide 3" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+4" alt="Slide 4" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+5" alt="Slide 5" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+6" alt="Slide 6" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+7" alt="Slide 7" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+8" alt="Slide 8" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://via.placeholder.com/500x300?text=Slide+9" alt="Slide 9" />
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
 
-        </div>
-        <!-------- 인기 브랜드 TOP6 ---------->
-        <div class="brand__top6">
-            <div>
-                <p class="brand__top6__title">인기 브랜드 <span>TOP6</span></p>
-                <p class="brand__top6__subtitle">인기 있는 브랜드가 다 이유가 있는법! 당신의 마음을 사로잡는 브랜드</p>
-            </div>
-            <div class="all__item">
-                <a href="/brand/list-view">더보기
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+
+<section layout:fragment="contents">
+
+	<!-------- 메인 영역 ---------->
+	<main class="main__wrap">
+		<div class="swiper mySwiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="/static/images/logo/Louisuitton.webp" alt="Slide 1" />
+					<div class="swiper__title">올 겨울 신상</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="https://via.placeholder.com/500x300?text=Slide+2"
+						alt="Slide 2" />
+				</div>
+				<div class="swiper-slide">
+					<img src="https://via.placeholder.com/500x300?text=Slide+3"
+						alt="Slide 3" />
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+
+		</div>
+		<!-------- 인기 브랜드 TOP6 ---------->
+		<div class="brand__top6">
+			<div>
+				<p class="brand__top6__title">
+					인기 브랜드 <span>TOP6</span>
+				</p>
+				<p class="brand__top6__subtitle">인기 있는 브랜드가 다 이유가 있는법! 당신의 마음을
+					사로잡는 브랜드</p>
+			</div>
+			<div class="all__item">
+				<a href="/brand/list-view">더보기 <svg
+						xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+						fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+							d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
                         </path>
                     </svg>
-                </a>
-            </div>
-            <div class="brand__top__img">
-                <ul class="brand__top__list">
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/louisvuitton.svg" alt="Slide 4" style="width:30%" />
-                        <div class="top1"><span>1</span></div>
-                    </li>
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/chanel.svg" alt="Slide 4" />
-                        <div class="top2"><span>2</span></div>
-                    </li>
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/hermes.svg" alt="Slide 4" />
-                        <div class="top3"><span>3</span></div>
-                    </li>
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/gucci.svg" alt="Slide 4" />
-                        <div class="top4"><span>4</span></div>
-                    </li>
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/Dior.svg" alt="Slide 4" />
-                        <div class="top5"><span>5</span></div>
-                    </li>
-                    <li class="brand__top__item">
-                        <img src="/static/images/brandimg/Prada.png" alt="Slide 4" />
-                        <div class="top6"><span>6</span></div>
-                    </li>
-                </ul>
-            </div>
+				</a>
+			</div>
+			<div class="brand__top__img">
+				<ul class="brand__top__list">
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/louisvuitton.svg" alt="Slide 4"
+						style="width: 30%" />
+						<div class="top1">
+							<span>1</span>
+						</div></li>
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/chanel.svg" alt="Slide 4" />
+						<div class="top2">
+							<span>2</span>
+						</div></li>
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/hermes.svg" alt="Slide 4" />
+						<div class="top3">
+							<span>3</span>
+						</div></li>
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/gucci.svg" alt="Slide 4" />
+						<div class="top4">
+							<span>4</span>
+						</div></li>
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/Dior.svg" alt="Slide 4" />
+						<div class="top5">
+							<span>5</span>
+						</div></li>
+					<li class="brand__top__item"><img
+						src="/static/images/brandimg/Prada.png" alt="Slide 4" />
+						<div class="top6">
+							<span>6</span>
+						</div></li>
+				</ul>
+			</div>
 
-        </div>
-        <!-------- 인기 브랜드 TOP6 ---------->
-        <!-------- 금일 추천 브랜드 TOP5 ---------->
-        <div class="today_top5">
-            <p class="today_top5__title">금일의 추천 브랜드 <span>TOP5</span></p>
-            <p class="today_top5__subtitle">금일의 추천 브랜드를 살펴보고 취향을 학인해보세요.</p>
-            <div class="all__item">
-                <a href="/brand/list-view">더보기
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+		</div>
+		<!-------- 인기 브랜드 TOP6 ---------->
+		<!-------- 금일 추천 브랜드 TOP5 ---------->
+		<div class="today_top5">
+			<p class="today_top5__title">
+				금일의 추천 브랜드 <span>TOP5</span>
+			</p>
+			<p class="today_top5__subtitle">금일의 추천 브랜드를 살펴보고 취향을 학인해보세요.</p>
+			<div class="all__item">
+				<a href="/brand/list-view">더보기 <svg
+						xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+						fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+							d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
                         </path>
                     </svg>
-                </a>
-            </div>
-            <div class="swiper mySwiper2">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/500x300?text=Slide+1" alt="Slide 1" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/500x300?text=Slide+2" alt="Slide 2" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/500x300?text=Slide+3" alt="Slide 3" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/500x300?text=Slide+4" alt="Slide 4" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://via.placeholder.com/500x300?text=Slide+5" alt="Slide 5" />
-                    </div>
-                </div>
-                <div class="swiper-button-next" style="color: rgb(206, 175, 3);"></div>
-                <div class="swiper-button-prev" style="color: rgb(206, 175, 3);"></div>
-            </div>
-        </div>
-        <!-------- 금일 추천 브랜드 TOP5 ---------->
-        <!-------- 중고 명품 마켓 인기 게시글 ---------->
-        <div class="popular__post">
-            <p class="popular__post__title"><span>HOT</span> 중고 명품 마켓 인기 게시글</p>
-            <p class="popular__post__subtitle">스타일과 품질을 겸비한 중고 명품, 지금 가장 인기있는 게시글을 확인해보세요.</p>
-            <div class="all__item">
-                <a href="/post/list-view">더보기
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                        class="bi bi-arrow-right" viewBox="0 0 16 16">
+				</a>
+			</div>
+			<div class="swiper mySwiper2">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="https://via.placeholder.com/500x300?text=Slide+1"
+							alt="Slide 1" />
+					</div>
+					<div class="swiper-slide">
+						<img src="https://via.placeholder.com/500x300?text=Slide+2"
+							alt="Slide 2" />
+					</div>
+					<div class="swiper-slide">
+						<img src="https://via.placeholder.com/500x300?text=Slide+3"
+							alt="Slide 3" />
+					</div>
+					<div class="swiper-slide">
+						<img src="https://via.placeholder.com/500x300?text=Slide+4"
+							alt="Slide 4" />
+					</div>
+					<div class="swiper-slide">
+						<img src="https://via.placeholder.com/500x300?text=Slide+5"
+							alt="Slide 5" />
+					</div>
+				</div>
+				<div class="swiper-button-next" style="color: rgb(206, 175, 3);"></div>
+				<div class="swiper-button-prev" style="color: rgb(206, 175, 3);"></div>
+			</div>
+		</div>
+		<!-------- 금일 추천 브랜드 TOP5 ---------->
+		<!-------- 중고 명품 마켓 인기 게시글 ---------->
+		<div class="popular__post">
+			<p class="popular__post__title">
+				<span>HOT</span> 중고 명품 마켓 인기 게시글
+			</p>
+			<p class="popular__post__subtitle">스타일과 품질을 겸비한 중고 명품, 지금 가장 인기있는
+				게시글을 확인해보세요.</p>
+			<div class="all__item">
+				<a href="/post/list-view">더보기 <svg
+						xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+						fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+							d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
                         </path>
                     </svg>
-                </a>
-            </div>
-            <div class="popular__post__lists">
-                <ul class="popular__post__list">
-                    <li class="popular__post__items">
-                        <div class="popular__post__img">
-                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
-                                    alt="Slide 5" /></a>
-                        </div>
-                        <div class="popular__post__tit">
-                            <a href="">[중고] 루이비통 가방 이거 사실분 계신가요~~~~~~~~~계신가요~~~~~~~~~계신가요~~~~~~~~~</a>
-                        </div>
-                        <div class="popular__post__author">
-                            <a href="">작성자</a>
-                        </div>
-                    </li>
-                    <li class="popular__post__items">
-                        <div class="popular__post__img">
-                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
-                                    alt="Slide 5" /></a>
-                        </div>
-                        <div class="popular__post__tit">
-                            <a href="">[중고] 루이비통 가방 이거 사실분 계신가요~~~~~~~~~계신가요~~~~~~~~~계신가요~~~~~~~~~</a>
-                        </div>
-                        <div class="popular__post__author">
-                            <a href="">작성자</a>
-                        </div>
-                    </li>
-                    <li class="popular__post__items">
-                        <div class="popular__post__img">
-                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
-                                    alt="Slide 5" /></a>
-                        </div>
-                        <div class="popular__post__tit">
-                            <a href="">[중고] 구찌 가방 이거 사실분 연락주세요. </a>
-                        </div>
-                        <div class="popular__post__author">
-                            <a href="">작성자</a>
-                        </div>
-                    </li>
-                    <li class="popular__post__items">
-                        <div class="popular__post__img">
-                            <a href=""><img src="" alt=""><img src="https://via.placeholder.com/600x500?text=Slide+5"
-                                    alt="Slide 5" /></a>
-                        </div>
-                        <div class="popular__post__tit">
-                            <a href="">[중고] 루이비통 가방 이거 사실분 짭아님</a>
-                        </div>
-                        <div class="popular__post__author">
-                            <a href="">작성자</a>
-                        </div>
-                    </li>
+				</a>
+			</div>
+			<div class="popular__post__lists">
+				<ul class="popular__post__list">
+	<li th:each="post, iterStat : ${topPosts}" class="popular__post__items">
+    <div class="popular__post__img">
+        <a href="#">
+            <img th:src="${post[0].imagePath}" style="height:590px;" alt="게시글 이미지" /> <!-- 이미지 경로 -->
+        </a>
+    </div>
+    <div class="popular__post__tit">
+        <a href="#"
+           th:text="${post[0].title}"></a> <!-- 제목 -->
+    </div>
+    <div class="popular__post__author">
+        <a href="#"
+           th:text="${post[0].userId}">작성자</a> <!-- 작성자 ID -->
+    </div>
+    <div class="popular__post__views">
+        조회수: <span th:text="${post[1]}"></span> <!-- 조회수 -->
+    </div>
+</li>
 
-                </ul>
-            </div>
-        </div>
-    </main>
 
-    </section>
- 
+
+
+				</ul>
+			</div>
+		</div>
+	</main>
+
+</section>
+
 
 </html>

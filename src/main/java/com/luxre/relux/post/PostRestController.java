@@ -78,29 +78,37 @@ public class PostRestController {
     
     
     @PostMapping("/update")
-    public Map<String, String> updatePost(@RequestBody Map<String, String> requestData) {
-        String postIdString = requestData.get("postId");
+    public Map<String, String> updatePost(@RequestBody Map<String, Object> requestData) {
+        String postIdString = (String) requestData.get("postId");
         if (postIdString == null || postIdString.isEmpty()) {
             throw new IllegalArgumentException("postId must not be null or empty");
         }
-        
-        int postId = Integer.parseInt(postIdString);
-        String title = requestData.get("title");
-        String contents = requestData.get("contents");
-        String imagePath = requestData.get("imagePath");
-        postService.updatePost(postId, title, contents, imagePath);
-        
-        Post existingPost = postService.getPostById(postId);
-        if (existingPost == null) {
-            throw new IllegalArgumentException("게시물이 존재하지 않습니다.");
-        }
+
+        int postId = Integer.parseInt(postIdString); // String에서 Integer로 변환
+
+        String title = (String) requestData.get("title");
+        String contents = (String) requestData.get("contents");
+        String imagePath = (String) requestData.get("imagePath");
 
         // 게시물 업데이트
-        postService.updatePost(postId, title, contents, imagePath); // 반환값 필요 없음
+        Post existingPost = postService.getPostById(postId);
+        if (existingPost == null) {
+            Map<String, String> resultMap = new HashMap<>();
+            resultMap.put("result", "fail");
+            resultMap.put("message", "게시물이 존재하지 않습니다.");
+            return resultMap;
+        }
+
+        postService.updatePost(postId, title, contents, imagePath);
+
+        // 성공 응답
         Map<String, String> resultMap = new HashMap<>();
         resultMap.put("result", "success");
-        return resultMap; // 성공 응답
+        return resultMap;
     }
+
+
+
     
     @PostMapping("/delete")
     public Map<String, String> deletePost(
