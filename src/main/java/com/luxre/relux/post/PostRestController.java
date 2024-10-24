@@ -84,7 +84,7 @@ public class PostRestController {
             throw new IllegalArgumentException("postId must not be null or empty");
         }
 
-        int postId = Integer.parseInt(postIdString); // String에서 Integer로 변환
+        int postId = Integer.parseInt(postIdString);
 
         String title = (String) requestData.get("title");
         String contents = (String) requestData.get("contents");

@@ -122,8 +122,9 @@ public class PostService {
         }
         return false;
     }
-
-    public long getPostViewCount(int postId) {
+    
+    // 게시물 조회수 확인가능 메소드
+    public int getPostViewCount(int postId) {
         return postViewService.getPostViewCount(postId);
     }
 

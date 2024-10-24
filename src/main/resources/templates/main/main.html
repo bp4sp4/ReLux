@@ -146,28 +146,25 @@
 			</div>
 			<div class="popular__post__lists">
 				<ul class="popular__post__list">
-	<li th:each="post, iterStat : ${topPosts}" class="popular__post__items">
-    <div class="popular__post__img">
-        <a href="#">
-            <img th:src="${post[0].imagePath}" style="height:590px;" alt="게시글 이미지" /> <!-- 이미지 경로 -->
-        </a>
-    </div>
-    <div class="popular__post__tit">
-        <a href="#"
-           th:text="${post[0].title}"></a> <!-- 제목 -->
-    </div>
-    <div class="popular__post__author">
-        <a href="#"
-           th:text="${post[0].userId}">작성자</a> <!-- 작성자 ID -->
-    </div>
-    <div class="popular__post__views">
-        조회수: <span th:text="${post[1]}"></span> <!-- 조회수 -->
-    </div>
-</li>
+					<li th:each="post, iterStat : ${topPosts}"
+						class="popular__post__items">
+						<div class="popular__post__img">
+							<a href="#"> <img th:src="${post[0].imagePath}"
+								style="height: 590px;" alt="게시글 이미지" /> <!-- 이미지 경로 -->
+							</a>
+						</div> <!-- 제목 -->
+						<div class="popular__post__tit">
+							<a href="#" th:text="${post[0].title}"></a>
 
+						</div> <!-- 작성자 ID -->
+						<div class="popular__post__author">
+							<a href="#" th:text="${post[0].userId}">작성자</a>
 
-
-
+						</div> <!-- 조회수 -->
+						<div class="popular__post__views">
+							조회수: <span th:text="${post[1]}"></span>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>

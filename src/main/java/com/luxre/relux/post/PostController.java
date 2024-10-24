@@ -43,6 +43,7 @@ public class PostController {
 	        @RequestParam(name = "size", defaultValue = "8") int size, Model model) {
 
 	    Page<PostDto> postDtoPage = postService.getPageList(page - 1, size);
+	    
 
 	    int currentPage = postDtoPage.getNumber() + 1;
 	    int totalPages = postDtoPage.getTotalPages();
@@ -79,8 +80,10 @@ public class PostController {
 		String cleanedContents = Jsoup.clean(post.getContents(), "", Whitelist.none(),
 				new Document.OutputSettings().prettyPrint(false));
 		
-		 long viewCount = postService.getPostViewCount(id);
+		// 현재 게시물 조회수 메소드
+		int viewCount = postService.getPostViewCount(id);
 		
+		// 댓글 정보 가져오기
 		List<CommentDto> comments = commentService.getComment(id);
 
 		// 모델에 게시글과 사용자 정보를 추가
