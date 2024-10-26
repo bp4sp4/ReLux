@@ -32,6 +32,7 @@ public class CommentService {
 		return commentRepository.save(comment);
 	}
 	
+	// Dto는 객체를 detail 에 넘겨줘야
 	public List<CommentDto> getComment(int postId) {
 	    List<Comment> comments = commentRepository.findByPostId(postId);
 	    List<CommentDto> commentDtos = new ArrayList<>();

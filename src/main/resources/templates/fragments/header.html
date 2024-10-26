@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <header id="main__header">
-    <div id="wrap">
-        <a href="/main/list-view"><span class="main__logo">ReLux</span></a>
-        <div class="main__search__wrap">
-            <form action="#">
-                <div class="w-[500px] h-12 relative flex rounded-xl">
-                    <input style="font-family: 'Paperlogy-8ExtraBold';" required=""
-                        class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#777777] focus:shadow-md"
-                        id="address" type="text" />
-                    <label style="font-family: 'Paperlogy-8ExtraBold';"
-                        class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#777777] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#777777] duration-150"
-                        for="address">명품을 입력하세요.</label>
-                </div>
-            </form>
-        </div>
-        <div class="main__login">
-            <span id="userName" style="display: none;"></span> <!-- 사용자 이름 표시 -->
-            <a class="main__gologin" id="loginLink" href="/user/login-view">로그인 / 회원가입</a>
-            <a id="logout" href="/user/logout" style="display: none;">로그아웃</a>
-        </div>
-    </div>
+	<div id="wrap">
+		<a href="/main/list-view"><span class="main__logo">ReLux</span></a>
+		<div class="main__search__wrap">
+			<form action="/main/search" method="get">
+				<div class="w-[500px] h-12 relative flex rounded-xl">
+					<input name="keyword" style="font-family: 'Paperlogy-8ExtraBold';"
+						required=""
+						class="peer w-full bg-transparent outline-none px-4 text-base rounded-xl bg-white border border-[#777777] focus:shadow-md"
+						id="address" type="text" /> <label
+						style="font-family: 'Paperlogy-8ExtraBold;'"
+						class="absolute top-1/2 translate-y-[-50%] bg-white left-4 px-2 peer-focus:top-0 peer-focus:left-3 font-light text-base peer-focus:text-sm peer-focus:text-[#777777] peer-valid:-top-0 peer-valid:left-3 peer-valid:text-sm peer-valid:text-[#777777] duration-150"
+						for="address">명품을 입력하세요.</label>
+				</div>
+			</form>
+		</div>
+		<div class="main__login">
+			<span id="userName" style="display: none;"></span>
+			<!-- 사용자 이름 표시 -->
+			<a class="main__gologin" id="loginLink" href="/user/login-view">로그인
+				/ 회원가입</a> <a id="logout" href="/user/logout" style="display: none;">로그아웃</a>
+		</div>
+	</div>
 </header>
+</html>

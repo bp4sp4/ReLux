@@ -31,7 +31,7 @@ public interface UserRepository {
 	// 아이디 찾기 비밀번호 찾기도 사용
 	public User findUserByEmail(@Param("email") String email);
 
-  
+	// 랜덤 비밀번호 db저장 기능 
 	public void updatePassword(@Param("id") int id, @Param("password") String password);
 
 }

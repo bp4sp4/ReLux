@@ -32,7 +32,7 @@ public class PostViewService {
             postViewRepository.save(postView);
         }
     }
-    // 특정 게시물 횟수 추가
+    // 특정 게시물 조회수 조회 기능
     public int getPostViewCount(int postId) {
         return postViewRepository.countByPostId(postId);
     }

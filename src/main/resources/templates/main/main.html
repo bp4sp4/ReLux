@@ -146,7 +146,7 @@
 			</div>
 			<div class="popular__post__lists">
 				<ul class="popular__post__list">
-					<li th:each="post, iterStat : ${topPosts}"
+					<li th:each="post : ${topPosts}"
 						class="popular__post__items">
 						<div class="popular__post__img">
 							<a href="#"> <img th:src="${post[0].imagePath}"
