@@ -20,9 +20,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(permissionInterceptor)
-                .addPathPatterns("/**")  // 모든 경로에 대해 인터셉터 적용
-                .excludePathPatterns("/static/**", "/user/login-view", "/user/login", "/user/join"); // 로그인, 회원가입 경로 제외
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**", "/user/login-view", "/user/login", "/user/join", "/api/userId"); // /api/userId 추가
     }
+
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

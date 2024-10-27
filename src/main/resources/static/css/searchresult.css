@@ -1,0 +1,72 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+
+.main__wrap {
+    padding-top: 16px;
+    padding-bottom: 96px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    font-family: 'Paperlogy-8ExtraBold';
+
+}
+
+.search__title {
+	font-size : 1.5rem;
+	margin-bottom : 20px;
+}
+
+.brand-container, .post-container {
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s;
+}
+
+.brand-container:hover, .post-container:hover {
+	transform: translateY(-5px);
+}
+
+.brand-container img, .post-container img {
+	border-radius: 4px;
+	margin-right: 16px;
+}
+
+.brand-info, .post-info {
+	display: flex;
+	align-items: center;
+}
+
+h2 {
+	margin-bottom: 24px;
+	color: #333;
+}
+
+.brand-title {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.brand-price {
+	font-size: 1rem;
+	color: #6c757d;
+	font-family: 'GmarketSansMedium';
+}

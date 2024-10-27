@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luxre.relux.comment.domain.Comment;
+import com.luxre.relux.comment.dto.CommentUpdateRequest;
 import com.luxre.relux.comment.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
@@ -41,25 +45,36 @@ public class CommentRestController {
         return resultMap;
     }
 	
-	 // 댓글 수정 API
-    @PostMapping("/update")
-    public Map<String, String> modifyComment(
-            @RequestParam("commentId") int commentId,
-            @RequestParam("contents") String contents,
-            @RequestParam("userId") int userId) {
 
-        boolean isUpdated = commentService.updateComment(commentId, userId, contents);
+	@GetMapping("/api/userId")
+	public ResponseEntity<Integer> getUserId(HttpSession session) {
+	    Integer userId = (Integer) session.getAttribute("userId");
+	    return ResponseEntity.ok(userId != null ? userId : 0);
+	}
 
-        Map<String, String> resultMap = new HashMap<>();
-        if (isUpdated) {
-            resultMap.put("result", "success");
-        } else {
-            resultMap.put("result", "fail");
-            resultMap.put("message", "수정 권한이 없습니다.");
-        }
 
-        return resultMap;
-    }
+	
+	@PostMapping("/update")
+	public Map<String, String> modifyComment(@RequestBody CommentUpdateRequest request) {
+	    int commentId = request.getCommentId();
+	    String contents = request.getContents();
+	    int userId = request.getUserId();
+
+	    // 댓글 수정 요청을 처리
+	    boolean isUpdated = commentService.updateComment(commentId, userId, contents);
+
+	    Map<String, String> resultMap = new HashMap<>();
+	    if (isUpdated) {
+	        resultMap.put("result", "success");
+	    } else {
+	        resultMap.put("result", "fail");
+	        resultMap.put("message", "수정 권한이 없습니다.");
+	    }
+
+	    return resultMap;
+	}
+
+	
     
     @PostMapping("/delete")
     public Map<String, String> deleteComment(

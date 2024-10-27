@@ -163,6 +163,7 @@
     border: 1px solid #ccc;
     color: #000000;
     font-family: "Noto Sans", sans-serif;
+    margin-right : 5px;
 }
 
 .post__wrap__detail .post__wrap__reply .post__wrap__reply__list .post__wrap__reply__items .post__wrap__reply__items__btn .reply__update:hover {

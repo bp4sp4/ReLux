@@ -12,4 +12,6 @@ import lombok.ToString;
 public class BrandMainDto {
     private String brandName;
     private String brandImagePath;
+    private String productName;
+    private int brandPrice;
 }

@@ -53,7 +53,6 @@ public class CommentService {
 	    return commentDtos;
 	}
 	
-	// 댓글 수정 
 	public boolean updateComment(int commentId, int userId, String contents) {
 	    Comment comment = commentRepository.findById(commentId);
 	    if (comment != null && comment.getUserID() == userId) { // 사용자 확인
@@ -63,6 +62,7 @@ public class CommentService {
 	    }
 	    return false;
 	}
+
     // 댓글 삭제
 	public boolean deleteComment(int commentId, int userId) {
 	    Comment comment = commentRepository.findById(commentId);
