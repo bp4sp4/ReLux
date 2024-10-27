@@ -32,9 +32,11 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="userId")
-	private int userId;
+
+	@ManyToOne // 다대일 관계
+	@JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
+	private User user; 
+
 	
 	private String title;
     private String contents;
@@ -52,6 +54,7 @@ public class Post {
 
 	@Column(name = "views")
 	private int views;
-	
 
+	@Column(name="userId")
+	private int userId; 
 }
