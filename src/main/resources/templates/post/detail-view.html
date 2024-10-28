@@ -41,7 +41,7 @@
 						th:text="'조회수: ' + ${viewCount}">조회수: 5</div>
 				</div>
 				<img th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}"
-					alt="게시글 이미지" />
+					/>
 				<div class="post__wrap__content" th:text="${cleanedContents}">내용이
 					없습니다</div>
 			</div>

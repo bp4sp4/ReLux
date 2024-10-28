@@ -1,34 +1,36 @@
 @charset "UTF-8";
+
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Paperlogy-8ExtraBold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
+	font-family: 'Paperlogy-8ExtraBold';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2')
+		format('woff2');
+	font-weight: 600;
+	font-style: normal;
 }
-
-
 
 .main__wrap {
-    padding-top: 16px;
-    padding-bottom: 96px;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    column-gap: 20px;
-    font-family: 'Paperlogy-8ExtraBold';
-
+	padding-top: 16px;
+	padding-bottom: 96px;
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	column-gap: 20px;
+	font-family: 'Paperlogy-8ExtraBold';
 }
 
 .search__title {
-	font-size : 1.5rem;
-	margin-bottom : 20px;
+	font-size: 1.5rem;
+	margin-bottom: 20px;
 }
 
 .brand-container, .post-container {
@@ -69,4 +71,27 @@ h2 {
 	font-size: 1rem;
 	color: #6c757d;
 	font-family: 'GmarketSansMedium';
+}
+
+.all__item {
+	position: absolute;
+	right: 0px;
+}
+
+.all__item2 {
+	position: absolute;
+	right: 0px;
+	top: 46px;
+}
+
+.search__main__post {
+	position: relative;
+}
+
+.search__main__post .all__item2>a {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	cursor: pointer;
+	color: #777777 !important;
 }

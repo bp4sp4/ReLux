@@ -77,6 +77,10 @@
     padding-bottom: 30px;
 }
 
+.main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__title__sz {
+ font-size:2rem;	
+}
+
 .main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn {
     display: flex;
     align-items: center;
