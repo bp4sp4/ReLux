@@ -81,7 +81,7 @@ public class PostRestController {
     public Map<String, String> updatePost(@RequestBody Map<String, Object> requestData) {
         String postIdString = (String) requestData.get("postId");
         if (postIdString == null || postIdString.isEmpty()) {
-            throw new IllegalArgumentException("postId must not be null or empty");
+            throw new IllegalArgumentException("게시글이 없어요");
         }
 
         int postId = Integer.parseInt(postIdString);

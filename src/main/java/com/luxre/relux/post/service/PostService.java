@@ -90,19 +90,22 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    // 게시물 업데이트
     public Post updatePost(int id, String title, String contents, String imagePath) {
         Post post = postRepository.findById(id).orElse(null);
         if (post != null) {
             post.setTitle(title);
             post.setContents(contents);
-            if (imagePath != null && !imagePath.isEmpty()) {
+            // 이미지 경로가 null인 경우 기존 이미지 경로도 null로 설정
+            if (imagePath != null) {
                 post.setImagePath(imagePath);
+            } else {
+                post.setImagePath(null);
             }
-            return postRepository.save(post); 
+            return postRepository.save(post);
         }
         return null; 
     }
+
 
     // 게시물 ID로 조회
     public Post getPostById(int id) {

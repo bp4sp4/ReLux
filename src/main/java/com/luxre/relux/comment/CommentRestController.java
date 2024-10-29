@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luxre.relux.comment.domain.Comment;
@@ -47,10 +47,12 @@ public class CommentRestController {
 	
 
 	@GetMapping("/api/userId")
-	public ResponseEntity<Integer> getUserId(HttpSession session) {
+	@ResponseBody
+	public int getUserId(HttpSession session) {
 	    Integer userId = (Integer) session.getAttribute("userId");
-	    return ResponseEntity.ok(userId != null ? userId : 0);
+	    return userId != null ? userId : 0;
 	}
+
 
 
 	

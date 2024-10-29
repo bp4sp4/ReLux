@@ -98,7 +98,7 @@ a:hover{
     background-color: rgba(119, 119, 119, 0.2);
 }
 
-#main__header #wrap .main__login .main__gologin {
+#main__header #wrap .main__login {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,7 +109,10 @@ a:hover{
     text-decoration: none;
     color: #000;
     font-family: 'Paperlogy-8ExtraBold';
+    cursor : pointer;
 }
+
+
 
 /*------- 헤더영역 -------  */
 
