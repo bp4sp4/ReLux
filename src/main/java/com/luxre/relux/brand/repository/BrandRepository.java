@@ -27,6 +27,7 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
 	// 특정 브랜드 이름과 가격 조건으로 필터링 // ex) 브랜드: 구찌, 가격: 100만원 이상
 	List<Brand> findByBrandnameAndBrandPriceGreaterThanEqual(String brand, int maxPrice);
 
+	// 검색 키워드 
 	@Query("SELECT new com.luxre.relux.brand.dto.BrandMainDto(b.brandname, b.brandImagePath, b.productName, b.brandPrice) "
 		       + "FROM Brand b WHERE b.brandname LIKE %:keyword%")
 	List<BrandMainDto> findByKeyword(@Param("keyword") String keyword);

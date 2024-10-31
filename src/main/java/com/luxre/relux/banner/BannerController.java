@@ -14,7 +14,7 @@ import com.luxre.relux.banner.service.BannerService;
 import com.luxre.relux.common.FileManager;
 
 @Controller
-@RequestMapping("/banner")
+@RequestMapping("/admin/banner")
 public class BannerController {
 	@Autowired
     private BannerService bannerService;
@@ -22,7 +22,7 @@ public class BannerController {
 	@GetMapping("/list-view")
     public String bannerList(Model model) {
         model.addAttribute("banners", bannerService.getBanners());
-        return "admin/banner_list";
+        return "/admin/banner-list";
     }
 
     @PostMapping("/add")
@@ -32,7 +32,7 @@ public class BannerController {
                             @RequestParam("displayOrder") int displayOrder) {
         String imagePath = FileManager.saveFile(17, imageFile); 
         if (imagePath == null) {
-            return "redirect:/banner?error";
+            return "redirect:/admin/banner?error";
         }
 
         Banner banner = new Banner();
@@ -42,13 +42,13 @@ public class BannerController {
         banner.setDisplayOrder(displayOrder);
         bannerService.saveBanner(banner);
 
-        return "redirect:/banner/list-view";
+        return "redirect:/admin/banner/list-view";
     }
     
     @PostMapping("/delete")
     public String deleteBanner(@RequestParam("id") int id) {
         bannerService.deleteBanner(id);
-        return "redirect:/banner"; 
+        return "redirect:/admin/banner/list-view";
     }
 
 
