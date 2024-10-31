@@ -89,6 +89,13 @@ public class UserRestController {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("userId", user.getId());
 	        session.setAttribute("userName", user.getName());
+	        
+	        // admin 계정 확인
+	        if ("admin".equals(loginId) && "admin1234".equals(password)) {
+	            resultMap.put("redirect", "/admin/banner/list-view"); 
+	        } else {
+	            resultMap.put("redirect", "/main/list-view"); 
+	        }
 		}
 		
 		return resultMap;

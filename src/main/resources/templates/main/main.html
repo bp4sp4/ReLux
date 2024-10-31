@@ -3,29 +3,20 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/default}">
 
-
 <section layout:fragment="contents">
 
 	<!-------- 메인 영역 ---------->
 	<main class="main__wrap">
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<img src="/static/images/logo/Louisuitton.webp" alt="Slide 1" />
-					<div class="swiper__title">올 겨울 신상</div>
-				</div>
-				<div class="swiper-slide">
-					<img src="https://via.placeholder.com/500x300?text=Slide+2"
-						alt="Slide 2" />
-				</div>
-				<div class="swiper-slide">
-					<img src="https://via.placeholder.com/500x300?text=Slide+3"
-						alt="Slide 3" />
+				<div class="swiper-slide" th:each="banner : ${banners}">
+					<img th:src="@{${banner.imagePath}}" th:alt="${banner.title}" />
+					<div class="swiper__title" th:text="${banner.title}"></div>
 				</div>
 			</div>
 			<div class="swiper-pagination"></div>
-
 		</div>
+
 		<!-------- 인기 브랜드 TOP6 ---------->
 		<div class="brand__top6">
 			<div>
