@@ -10,16 +10,16 @@
 <body>
 	<section layout:fragment="contents">
 		<div class="wrap__admin">
-			<h2>배너 관리</h2>
+			<h2 class="wrap__admin__title">배너 관리</h2>
 			<form th:action="@{/admin/banner/add}" method="post" enctype="multipart/form-data" class="banner-form">
 				<input type="file" name="image" required />
 				<input type="text" name="title" placeholder="제목" required />
 				<input type="url" name="linkurl" placeholder="링크 URL" required />
 				<input type="number" name="displayOrder" placeholder="표시 순서" required />
-				<button type="submit" class="btn-add">배너 추가</button>
+				<button type="submit" class="btn__add">배너 추가</button>
 			</form>
 
-			<h3>등록된 배너 목록</h3>
+			<h3 class="wrap__admin__title">등록된 배너 목록</h3>
 			<ul class="banner-list">
 				<li th:each="banner : ${banners}" class="banner-item">
 					<img th:src="@{${banner.imagePath}}" alt="배너 이미지" class="banner-image" />
@@ -28,7 +28,7 @@
 					<span th:text="'표시 순서: ' + ${banner.displayOrder}" class="banner-order"></span>
 					<form th:action="@{/admin/banner/delete}" method="post" class="delete-form">
 						<input type="hidden" name="id" th:value="${banner.id}" />
-						<button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn-delete">삭제</button>
+						<button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn__delete">삭제</button>
 					</form>
 				</li>
 			</ul>

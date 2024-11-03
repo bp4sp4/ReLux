@@ -1,4 +1,19 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
 
 .wrap__admin {
 	max-width: 1200px;
@@ -7,13 +22,16 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
+	font-family: 'Paperlogy-8ExtraBold';
 }
 
-h2 {
+.wrap__admin .wrap__admin__title {
 	font-size: 2rem;
 	margin-bottom: 20px;
 	color: #333;
 }
+
+
 
 .banner-form {
 	display: flex;
@@ -37,18 +55,19 @@ input[type="file"] {
 	border: none; /* 파일 입력의 테두리 제거 */
 }
 
-.btn-add {
+.btn__add {
 	padding: 10px;
-	background-color: #28a745;
+	background-color: #be68f5;
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: background-color 0.3s;
+	margin-bottom : 20px;
 }
 
-.btn-add:hover {
-	background-color: #218838; /* 버튼 호버 색상 */
+.btn__add:hover {
+	background-color: #7b31ab; /* 버튼 호버 색상 */
 }
 
 h3 {
@@ -77,7 +96,7 @@ h3 {
 }
 
 .banner-item:hover {
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* hover 효과 */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .banner-image {
@@ -92,21 +111,12 @@ h3 {
 	color: #666;
 }
 
-.banner-link {
-	color: #007bff;
-	text-decoration: none;
-}
-
-.banner-link:hover {
-	text-decoration: underline; /* 링크 호버 효과 */
-}
-
 .delete-form {
-	display: inline; /* 삭제 폼을 인라인으로 표시 */
+	display: inline;
 }
 
-.btn-delete {
-	background-color: #dc3545;
+.btn__delete {
+	background-color: #be68f5;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -115,6 +125,3 @@ h3 {
 	padding: 5px 10px;
 }
 
-.btn-delete:hover {
-	background-color: #c82333; /* 삭제 버튼 호버 색상 */
-}
