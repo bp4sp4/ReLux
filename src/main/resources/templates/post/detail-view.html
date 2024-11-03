@@ -90,7 +90,7 @@
 				<!-- 댓글 작성 영역 -->
 				<div class="post__wrap__reply__article">
 					<textarea id="commentContents" cols="30" rows="10"
-						placeholder="로그인 후 댓글 작성이 가능합니다"
+						placeholder="다른 사람의 의견을 존중하고, 예의 있는 표현을 사용하세요. 비난이나 공격적인 언어는 피해야 합니다."
 						th:readonly="${session.userId == null}"></textarea>
 					<div class="post__wrap__reply__confirm">
 						<a href="#" id="createBtn" th:data-post-id="${post.id}">등록</a>

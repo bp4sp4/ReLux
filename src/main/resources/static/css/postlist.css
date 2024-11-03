@@ -70,9 +70,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
-    width: 300px;
+    width: 260px;
     font-family: 'GmarketSansMedium';
     margin: 10px 0px 10px 0px;
+    
 }
 
 .post__wrap .post__wrap__content .post__wrap__list .post__wrap__items .post__wrap__author {
@@ -84,6 +85,7 @@
     word-break: break-all;
     width: 300px;
     margin: 10px 0px 10px 0px;
+    font-family: 'GmarketSansMedium';
 }
 
 .post__wrap .post__wrap__write {
@@ -107,7 +109,7 @@
 }
 
 .post__wrap .post__wrap__write .post_wrap__writeBtn:hover {
-    text-decoration: underline;
+    background-color: rgba(119, 119, 119, 0.2);
 }
 
 .post__wrap .post__pagenation {
@@ -120,4 +122,5 @@
 
 .post__wrap .post__pagination {
     margin-top: 20px;
+    margin-bottom : 20px;
 }

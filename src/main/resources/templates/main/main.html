@@ -10,8 +10,10 @@
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide" th:each="banner : ${banners}">
+				<a th:href="@{${banner.linkurl}}" class="banner-link" target=_blank>
 					<img th:src="@{${banner.imagePath}}" th:alt="${banner.title}" style="width:100%; height:500px; object-fit:cover;" />
 					<div class="swiper__title" th:text="${banner.title}"></div>
+					</a>
 				</div>
 			</div>
 			<div class="swiper-pagination"></div>

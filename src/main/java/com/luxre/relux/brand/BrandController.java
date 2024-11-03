@@ -1,5 +1,6 @@
 package com.luxre.relux.brand;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,28 +23,29 @@ public class BrandController {
 		this.brandService = brandService;
 	}
 
-	@GetMapping("/list-view")
-	public String goBrand(@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "size", defaultValue = "10") int size, Model model) {
 
-		Pageable pageable = PageRequest.of(page - 1, size); 
-		Page<Brand> brandPage = brandService.getPageBrandList(pageable);
+    @GetMapping("/list-view")
+    public String goBrand(@RequestParam(name = "page", defaultValue = "1") int page,
+                          @RequestParam(name = "size", defaultValue = "10") int size, Model model) {
 
-		int currentPage = brandPage.getNumber() + 1; 
-		int totalPages = brandPage.getTotalPages();
-		int pageSize = 10; 
-		int currentPageGroup = (currentPage - 1) / pageSize + 1;
-		int startPage = (currentPageGroup - 1) * pageSize + 1;
-		int endPage = Math.min(startPage + pageSize - 1, totalPages);
+        Pageable pageable = PageRequest.of(page - 1, size); 
+        Page<Brand> brandPage = brandService.getPageBrandList(pageable);
 
-		model.addAttribute("brands", brandPage);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		
+        int currentPage = brandPage.getNumber() + 1; 
+        int totalPages = brandPage.getTotalPages();
+        int pageSize = 10; 
+        int currentPageGroup = (currentPage - 1) / pageSize + 1;
+        int startPage = (currentPageGroup - 1) * pageSize + 1;
+        int endPage = Math.min(startPage + pageSize - 1, totalPages);
 
-		return "brand/list-view";
-	}
+        model.addAttribute("brands", brandPage);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
+
+        return "brand/list-view";
+    }
+	    
 }

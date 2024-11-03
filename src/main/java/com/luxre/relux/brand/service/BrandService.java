@@ -30,7 +30,7 @@ public class BrandService {
                 .filter(Files::isRegularFile)
                 .filter(path -> {
                     String fileName = path.getFileName().toString().toLowerCase();
-                    return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".svg");
+                    return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".svg") || fileName.endsWith(".webp");
                 })
                 .map(path -> "/static/images/brandimg/" + path.getFileName().toString()) // URL 경로로 변경
                 .collect(Collectors.toList());

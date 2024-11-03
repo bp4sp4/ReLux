@@ -32,5 +32,6 @@ spring:
        mail.smtp.ssl.trust: smtp.gmail.com
 
 mybatis:
-  mapper-locations: mappers/*Mapper.xml
-   
+  mapper-locations: mappers/*Mapper.xml	
+kakao:
+   api-key: ${KAKAO_API_KEY}

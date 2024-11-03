@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/default}">
-
+	
 <section layout:fragment="contents">
 	<main class="main__wrap">
 		<section class="main__wrap__brand">
@@ -21,7 +21,7 @@
 						<span>초기화</span>
 					</div>
 				</div>
-
+				<div id="map" style="width: 100%; height: 350px;"></div>
 				<!-- 연령대 -->
 				<section class="main__brand__choice" id="ageFilter" name="age">
 					<div id="main__brand__category">
@@ -60,24 +60,36 @@
 							<p>전체</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="Louis Vuitton">
+							<input type="radio" name="brand" value="Louis Vuitton" onclick="searchPlace(this.value)">
 							<p>루이비통(Louis Vuitton)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="Chanel">
+							<input type="radio" name="brand" value="Chanel" onclick="searchPlace(this.value)">
 							<p>샤넬(Chanel)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="Prada">
+							<input type="radio" name="brand" value="Prada" onclick="searchPlace(this.value)">
 							<p>프라다</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="Comme des Garçons">
+							<input type="radio" name="brand" value="Comme des Garçons" onclick="searchPlace(this.value)">
 							<p>꼼데가르송(Comme des Garçons)</p>
 						</div>
 						<div class="main__brand__option2">
-							<input type="radio" name="brand" value="Saint Laurent">
+							<input type="radio" name="brand" value="Saint Laurent" onclick="searchPlace(this.value)">
 							<p>입생로랑(Saint Laurent)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="Gucci" onclick="searchPlace(this.value)"> 
+							<p>구찌(GUCCI)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="Daks" onclick="searchPlace(this.value)">
+							<p>닥스(Daks)</p>
+						</div>
+						<div class="main__brand__option2">
+							<input type="radio" name="brand" value="Burberry" onclick="searchPlace(this.value)">
+							<p>버버리(Burberry)</p>
 						</div>
 					</div>
 
@@ -93,58 +105,70 @@
 				</section>
 			</div>
 
-		<div id="brandList" class="main__brand__imgwrap">
-    <p th:text="${brands.totalElements > 0 ? '전체 ' + brands.totalElements + '개' : '전체 0개'}"></p>
+			<div id="brandList" class="main__brand__imgwrap">
+				<p
+					th:text="${brands.totalElements > 0 ? '전체 ' + brands.totalElements + '개' : '전체 0개'}"></p>
 
-    <a th:each="brand : ${brands.content}" class="main__brand__thumbnail" href="#">
-        <img th:src="${brand.brandImagePath}" alt="Brand Image" />
-        <div class="main__brand__thumbnail__desc">
-            <div class="main__brand__thumbnail__desc__title">
-                <p th:text="${brand.brandname}">브랜드명</p>
-                <p th:text="${brand.productName}">제품명</p>
-            </div>
-            <div class="main__brand__thumbnail__desc__price">
-                <p th:text="${#numbers.formatInteger(brand.brandPrice, 3, 'COMMA')} + '원'">98,500원</p>
-            </div>
-        </div>
-    </a>
-    <!-- 페이지네이션 -->
-<nav class="brand__pagination" aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <!-- 처음 버튼 -->
-        <li th:classappend="${currentPage == 1} ? 'disabled'">
-            <a th:href="@{/brand/list-view(page=1)}" th:if="${currentPage > 1}" class="page-link" aria-label="처음">처음</a>
-        </li>
+				<a th:each="brand : ${brands.content}"
+					class="main__brand__thumbnail" href="#"> <img
+					th:src="${brand.brandImagePath}" alt="Brand Image" />
+					<div class="main__brand__thumbnail__desc">
+						<div class="main__brand__thumbnail__desc__title">
+							<p th:text="${brand.brandname}">브랜드명</p>
+							<p th:text="${brand.productName}">제품명</p>
+						</div>
+						<div class="main__brand__thumbnail__desc__price">
+							<p
+								th:text="${#numbers.formatInteger(brand.brandPrice, 3, 'COMMA')} + '원'">98,500원</p>
+						</div>
+					</div>
+				</a>
+				<!-- 페이지네이션 -->
+				<nav class="brand__pagination" style="margin-top: 30px;"
+					aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<!-- 처음 버튼 -->
+						<li th:classappend="${currentPage == 1} ? 'disabled'"><a
+							th:href="@{/brand/list-view(page=1)}" th:if="${currentPage > 1}"
+							class="page-link" aria-label="처음">처음</a></li>
 
-        <!-- 이전 버튼 -->
-        <li class="page-item" th:class="${brands.hasPrevious() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{/brand/list-view(page=${currentPage - 1}, size=${brands.size})}" th:if="${currentPage > 1}" aria-label="이전">&lt;</a>
-        </li>
+						<!-- 이전 버튼 -->
+						<li class="page-item"
+							th:class="${brands.hasPrevious() ? '' : 'disabled'}"><a
+							class="page-link"
+							th:href="@{/brand/list-view(page=${currentPage - 1}, size=${brands.size})}"
+							th:if="${currentPage > 1}" aria-label="이전">&lt;</a></li>
 
-        <!-- 페이지 번호 -->
-        <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${i == currentPage} ? 'active'">
-            <a th:href="@{/brand/list-view(page=${i}, size=${brands.size})}" class="page-link" th:text="${i}"></a>
-        </li>
+						<!-- 페이지 번호 -->
+						<li th:each="i : ${#numbers.sequence(startPage, endPage)}"
+							th:classappend="${i == currentPage} ? 'active'"><a
+							th:href="@{/brand/list-view(page=${i}, size=${brands.size})}"
+							class="page-link" th:text="${i}"></a></li>
 
-        <!-- 다음 버튼 -->
-        <li class="page-item" th:class="${brands.hasNext() ? '' : 'disabled'}">
-            <a class="page-link" th:href="@{/brand/list-view(page=${currentPage + 1}, size=${brands.size})}" th:if="${currentPage < totalPages}" aria-label="다음">&gt;</a>
-        </li>
+						<!-- 다음 버튼 -->
+						<li class="page-item"
+							th:class="${brands.hasNext() ? '' : 'disabled'}"><a
+							class="page-link"
+							th:href="@{/brand/list-view(page=${currentPage + 1}, size=${brands.size})}"
+							th:if="${currentPage < totalPages}" aria-label="다음">&gt;</a></li>
 
-        <!-- 마지막 버튼 -->
-        <li th:classappend="${currentPage == totalPages} ? 'disabled'">
-            <a th:href="@{/brand/list-view(page=${totalPages})}" th:if="${currentPage < totalPages}" class="page-link" aria-label="마지막">마지막</a>
-        </li>
-    </ul>
-</nav>
+						<!-- 마지막 버튼 -->
+						<li th:classappend="${currentPage == totalPages} ? 'disabled'">
+							<a th:href="@{/brand/list-view(page=${totalPages})}"
+							th:if="${currentPage < totalPages}" class="page-link"
+							aria-label="마지막">마지막</a>
+						</li>
+					</ul>
+				</nav>
 
 
 
-</div>
-
-
+			</div>
 	</main>
 </section>
+
+   
+
 
 <script layout:fragment="script">
 $(document).ready(function() {
@@ -203,6 +227,70 @@ $(document).ready(function() {
     });
 
 });
+
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 현재 표시된 마커들을 저장할 배열
+var markers = [];
+
+// 장소 검색 및 마커를 표시하는 함수
+function searchPlace(brand) {
+    // 이전 마커를 제거합니다
+    clearMarkers();
+    
+    var ps = new kakao.maps.services.Places(); 
+    ps.keywordSearch(brand + ' 매장', placesSearchCB);
+}
+
+// 마커들을 제거하는 함수
+function clearMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null); // 지도에서 마커를 제거합니다
+    }
+    markers = []; // 마커 배열을 초기화합니다
+}
+
+// 키워드 검색 완료 시 호출되는 콜백함수입니다
+function placesSearchCB(data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i = 0; i < data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        map.setBounds(bounds); // 검색된 장소 위치를 기준으로 지도 범위 재설정
+    } 
+}
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    // 마커를 생성하고 지도에 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
+
+    // 마커 배열에 추가
+    markers.push(marker);
+
+    // 마커에 클릭 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
+}
+
 </script>
 
 </html>
