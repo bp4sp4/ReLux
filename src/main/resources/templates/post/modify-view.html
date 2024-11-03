@@ -90,7 +90,7 @@ $(document).ready(function() {
             // 에디터내에서 삭제 되면 호출되는 메소드 
             onMediaDelete: function(target) { 
                 const deletedUrl = target[0].src;
-                // 삭제된 이미지 URL이 업로드된 이미지와 같다면 변수 와  초기화합니다.
+                // 삭제된 이미지 URL이 업로드된 이미지와 같다면 변수와 초기화시킴
                 if (deletedUrl === uploadedImagePath || deletedUrl === existingImagePath) {
                     uploadedImagePath = '';
                     existingImagePath = ''; 
@@ -110,6 +110,7 @@ $(document).ready(function() {
             processData: false,
             success: function(response) {
                 uploadedImagePath = response.imageUrl;
+                // 서머노트에 이미지 업로드
                 $('#summernote').summernote('insertImage', uploadedImagePath);
             },
             error: function() {

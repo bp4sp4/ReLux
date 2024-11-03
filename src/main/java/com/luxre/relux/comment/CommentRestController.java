@@ -53,8 +53,6 @@ public class CommentRestController {
 	    return userId != null ? userId : 0;
 	}
 
-
-
 	
 	@PostMapping("/update")
 	public Map<String, String> modifyComment(@RequestBody CommentUpdateRequest request) {

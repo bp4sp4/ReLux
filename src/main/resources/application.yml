@@ -26,10 +26,10 @@ spring:
      username: bp4sp456@gmail.com
      password: ${mail.password}
      properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtp.starttls.required: true
-      mail.smtp.ssl.trust: smtp.gmail.com
+       mail.smtp.auth: true
+       mail.smtp.starttls.enable: true
+       mail.smtp.starttls.required: true
+       mail.smtp.ssl.trust: smtp.gmail.com
 
 mybatis:
   mapper-locations: mappers/*Mapper.xml

@@ -22,14 +22,14 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
 	public Optional<Post> findById(int id);
 
-	@Query(value = "SELECT p, COUNT(pv.id) AS viewCount, u.name " +
-            "FROM Post p LEFT JOIN PostView pv ON p.id = pv.postId " +
-            "LEFT JOIN User u ON p.userId = u.id " +
-            "GROUP BY p.id, u.name ORDER BY viewCount DESC")
+	@Query(value = "SELECT p, p.views, u.name " +
+            "FROM Post p LEFT JOIN User u ON p.userId = u.id " +
+            "ORDER BY p.views DESC")
 	List<Object[]> findTopPostsWithViewCount(Pageable pageable);
 
 
 
+	// 검색 키워드
 	 @Query("SELECT p FROM Post p WHERE p.title LIKE %:keyword% OR p.contents LIKE %:keyword%")
 	    List<Post> searchByKeyword(@Param("keyword") String keyword);
 

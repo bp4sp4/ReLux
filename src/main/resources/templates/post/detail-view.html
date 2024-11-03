@@ -37,9 +37,11 @@
 						th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">작성
 						시간이 없습니다</div>
 					<div class="post__wrap__info__viewer"
-						th:text="'조회수: ' + ${viewCount}">조회수: 5</div>
+						th:text="'조회수: ' + ${post.views}">조회수: 5</div>
+						
+						
 				</div>
-				<img th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}"
+				<img style="padding-top: 50px;" th:if="${post.imagePath != null}" th:src="@{${post.imagePath}}"
 					/>
 				<div class="post__wrap__content" th:text="${cleanedContents}">내용이
 					없습니다</div>
@@ -60,7 +62,7 @@
 								<a type="button" data-toggle="collapse"
 									th:attr="data-target='.multi-collapse-' + ${comment.id}"
 									th:if="${session.userId == comment.userId}"
-									class="bi bi-pencil-square">수정</a>
+									class="reply__modify">수정</a>
 
 								<!-- 댓글 삭제 버튼 -->
 								<a href="#" class="reply__delete"
@@ -71,7 +73,7 @@
 						</div>
 						<div th:text="${comment.contents}"
 							class="post__wrap__reply__items__contents">댓글 내용</div>
-						<form th:class="'collapse multi-collapse-' + ${comment.id}">
+						<form id="replyform" th:class="'collapse multi-collapse-' + ${comment.id}">
 							<input type="hidden" id="id" th:value="${comment.id}"> <input
 								type="hidden" id="postsId" th:value="${post.id}">
 							<div class="form-group">
@@ -79,7 +81,7 @@
 									th:text="${comment.contents}">댓글 내용</textarea>
 							</div>
 							<button type="button" id="btn-comment-update"
-								class="btn btn-outline-primary"
+								class="formreplymodify"
 								th:data-comment-id="${comment.id}">수정</button>
 						</form>
 					</li>
@@ -183,10 +185,6 @@
                 });
             }
         }
-
-        
-
-
        
     });
    	//수정 userId api값으로 가져와서 수정할수있게끔

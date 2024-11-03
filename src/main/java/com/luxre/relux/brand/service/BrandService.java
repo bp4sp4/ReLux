@@ -1,7 +1,16 @@
 package com.luxre.relux.brand.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import com.luxre.relux.brand.domain.Brand;
 import com.luxre.relux.brand.repository.BrandRepository;
 
@@ -9,6 +18,31 @@ import com.luxre.relux.brand.repository.BrandRepository;
 public class BrandService {
 
     private final BrandRepository brandRepository;
+    
+ // 실제 파일 시스템의 경로로 수정
+    private static final String IMAGE_DIRECTORY = "src/main/resources/static/images/brandimg";
+
+    
+    public List<String> getRandomImages(int count) {
+        try {
+            Path dirPath = Paths.get(IMAGE_DIRECTORY);
+            List<String> allImages = Files.list(dirPath)
+                .filter(Files::isRegularFile)
+                .filter(path -> {
+                    String fileName = path.getFileName().toString().toLowerCase();
+                    return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".svg");
+                })
+                .map(path -> "/static/images/brandimg/" + path.getFileName().toString()) // URL 경로로 변경
+                .collect(Collectors.toList());
+
+            Collections.shuffle(allImages); // 무작위 섞기
+            return allImages.stream().limit(count).collect(Collectors.toList()); // 상위 count개 선택
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
 
     // 생성자 주입
     public BrandService(BrandRepository brandRepository) {
@@ -18,6 +52,10 @@ public class BrandService {
     // 전체 브랜드 리스트 가져오기
     public List<Brand> allBrandList() {
         return brandRepository.findAll();
+    }
+    
+    public Page<Brand> getPageBrandList(Pageable pageable) {
+        return brandRepository.findAll(pageable);
     }
 
     // 필터링된 브랜드 리스트 가져오기

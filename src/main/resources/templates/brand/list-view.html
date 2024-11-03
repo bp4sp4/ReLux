@@ -93,38 +93,56 @@
 				</section>
 			</div>
 
-			<!-- 검색 결과 -->
-			<div id="brandList" class="main__brand__imgwrap">
-				<p th:text="${brand != null ? '전체 ' + brand.size() + '개' : '전체 0개'}"></p>
-				<a th:each="brand : ${brand}" class="main__brand__thumbnail"
-					href="#"> <img th:src="${brand.brandImagePath}"
-					alt="Brand Image" />
-					<div class="main__brand__thumbnail__desc">
-						<div class="main__brand__thumbnail__desc__title">
-							<p th:text="${brand.brandname}">브랜드명</p>
-							<p th:text="${brand.productName}">제품명</p>
-						</div>
-						<div class="main__brand__thumbnail__desc__price">
-							<p th:text="${#numbers.formatInteger(brand.brandPrice, 3, 'COMMA')} + '원'">98,500원</p>
-						</div>
-					</div>
-				</a>
-			</div>
-		</section>
+		<div id="brandList" class="main__brand__imgwrap">
+    <p th:text="${brands.totalElements > 0 ? '전체 ' + brands.totalElements + '개' : '전체 0개'}"></p>
 
-		<!-- 페이지네이션 -->
-		<nav class="brand__pagenation" aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#"
-					tabindex="-1">이전</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#">다음</a></li>
-			</ul>
-		</nav>
+    <a th:each="brand : ${brands.content}" class="main__brand__thumbnail" href="#">
+        <img th:src="${brand.brandImagePath}" alt="Brand Image" />
+        <div class="main__brand__thumbnail__desc">
+            <div class="main__brand__thumbnail__desc__title">
+                <p th:text="${brand.brandname}">브랜드명</p>
+                <p th:text="${brand.productName}">제품명</p>
+            </div>
+            <div class="main__brand__thumbnail__desc__price">
+                <p th:text="${#numbers.formatInteger(brand.brandPrice, 3, 'COMMA')} + '원'">98,500원</p>
+            </div>
+        </div>
+    </a>
+    <!-- 페이지네이션 -->
+<nav class="brand__pagination" aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <!-- 처음 버튼 -->
+        <li th:classappend="${currentPage == 1} ? 'disabled'">
+            <a th:href="@{/brand/list-view(page=1)}" th:if="${currentPage > 1}" class="page-link" aria-label="처음">처음</a>
+        </li>
+
+        <!-- 이전 버튼 -->
+        <li class="page-item" th:class="${brands.hasPrevious() ? '' : 'disabled'}">
+            <a class="page-link" th:href="@{/brand/list-view(page=${currentPage - 1}, size=${brands.size})}" th:if="${currentPage > 1}" aria-label="이전">&lt;</a>
+        </li>
+
+        <!-- 페이지 번호 -->
+        <li th:each="i : ${#numbers.sequence(startPage, endPage)}" th:classappend="${i == currentPage} ? 'active'">
+            <a th:href="@{/brand/list-view(page=${i}, size=${brands.size})}" class="page-link" th:text="${i}"></a>
+        </li>
+
+        <!-- 다음 버튼 -->
+        <li class="page-item" th:class="${brands.hasNext() ? '' : 'disabled'}">
+            <a class="page-link" th:href="@{/brand/list-view(page=${currentPage + 1}, size=${brands.size})}" th:if="${currentPage < totalPages}" aria-label="다음">&gt;</a>
+        </li>
+
+        <!-- 마지막 버튼 -->
+        <li th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a th:href="@{/brand/list-view(page=${totalPages})}" th:if="${currentPage < totalPages}" class="page-link" aria-label="마지막">마지막</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+</div>
+
+
 	</main>
 </section>
 

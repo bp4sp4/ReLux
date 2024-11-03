@@ -83,7 +83,7 @@ public class UserService {
             throw new IllegalArgumentException("이메일에 해당하는 사용자가 없습니다.");
         }
 
-        String temporaryPassword = RandomPassword();
+        String temporaryPassword = randomPassword();
         String encryptedPassword = encoder.encode(temporaryPassword);
         
         // DB에 임시 비밀번호 업데이트
@@ -94,11 +94,17 @@ public class UserService {
         message.setTo(email);
         message.setSubject("리럭스 : 임시 비밀번호 발송");
         message.setText("당신의 임시 비밀번호는: " + temporaryPassword);
-        mailSender.send(message);
+
+        try {
+            mailSender.send(message);
+            System.out.println("Email sent successfully to " + email);
+        } catch (Exception e) {
+            System.err.println("Failed to send email: " + e.getMessage());
+        }
     }
 
     // 임시 비밀번호 생성
-    private String RandomPassword() {
+    private String randomPassword() {
         int length = 8; //  8자리 임시 비밀번호 길이
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
@@ -109,4 +115,5 @@ public class UserService {
         }
         return temporaryPassword.toString();
     }
+
 }

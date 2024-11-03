@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.luxre.relux.banner.service.BannerService;
 import com.luxre.relux.brand.dto.BrandMainDto;
 import com.luxre.relux.brand.repository.BrandRepository;
+import com.luxre.relux.brand.service.BrandService;
 import com.luxre.relux.main.service.MainService;
 import com.luxre.relux.post.domain.Post;
 import com.luxre.relux.post.repository.PostRepository;
@@ -25,12 +26,14 @@ public class MainController {
     private MainService mainService;
 	private PostRepository postRepository;
 	private BrandRepository brandRepository;
+	private BrandService brandService;
 	
-	public MainController(MainService mainService, PostRepository postRepository, BrandRepository brandRepository,BannerService bannerService) {
+	public MainController(MainService mainService, PostRepository postRepository, BrandRepository brandRepository,BannerService bannerService, BrandService brandService) {
 		this.mainService = mainService;
 		this.postRepository = postRepository;
 		this.brandRepository = brandRepository;
 		this.bannerService = bannerService;
+		this.brandService = brandService;
 	}
 
 	@GetMapping("/list-view")
@@ -38,6 +41,10 @@ public class MainController {
 	    model.addAttribute("banners", bannerService.getBanners());
 	    List<Object[]> topPosts = mainService.getTopPosts();
 	    model.addAttribute("topPosts", topPosts);
+
+	    List<String> randomImages = brandService.getRandomImages(5); 
+	    model.addAttribute("images", randomImages);
+
 	    return "main/main";
 	}
 
@@ -52,6 +59,7 @@ public class MainController {
 	        return "main/searchresult";
 	    }
 	 
+	
 
 
 	   

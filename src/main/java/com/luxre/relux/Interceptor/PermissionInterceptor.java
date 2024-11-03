@@ -23,7 +23,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
         // 로그인하지 않은 사용자가 글쓰기 페이지에 접근할 때
         if (userId == null) {
-            if (uri.startsWith("/post") || uri.startsWith("/post/create")) {
+            if (uri.startsWith("/post") || uri.startsWith("/post/create") || uri.startsWith("/admin/banner"))   {
                 response.sendRedirect("/user/login-view");
                 return false;
             }

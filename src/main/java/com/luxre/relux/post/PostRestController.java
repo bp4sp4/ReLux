@@ -1,7 +1,7 @@
 package com.luxre.relux.post;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luxre.relux.common.FileManager;
 import com.luxre.relux.post.domain.Post;
 import com.luxre.relux.post.service.PostService;
@@ -52,6 +55,7 @@ public class PostRestController {
         }
         return resultMap;
     }
+
     
     @PostMapping("/upload-image")
     public ResponseEntity<Map<String, String>> uploadImage(

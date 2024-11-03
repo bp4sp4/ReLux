@@ -18,18 +18,15 @@
 			</div>
 			<!--글의 리스트들 -->
 			<div class="post__wrap__content">
-			<ul class="post__wrap__list">
+				<ul class="post__wrap__list">
 					<li class="post__wrap__items" th:each="post : ${posts}"><a
 						th:href="@{/post/detail-view/{id}(id=${post.id})}"
 						class="post__wrap__list_link"> <img
 							th:src="${post.imagePath != null && !post.imagePath.isEmpty() ? post.imagePath : '/static/images/noimages.avif'}"
 							alt="게시글 이미지" class="post__image" />
-							<div class="post__wrap__title" th:text="${post.title}">제목
-							</div>
+							<div class="post__wrap__title" th:text="${post.title}">제목</div>
 							<div class="post__wrap__author"
 								th:text="'작성자: ' + ${post.userName}">작성자</div>
-								
-							
 					</a></li>
 				</ul>
 			</div>
@@ -49,7 +46,7 @@
 						th:classappend="${i == currentPage} ? 'active'"><a
 						th:href="@{/post/list-view(page=${i})}" class="page-link"
 						th:text="${i}">1</a></li>
-					
+
 					<li th:classappend="${endPage == totalPages} ? 'disabled'"><a
 						th:href="@{/post/list-view(page=${endPage + 1})}"
 						th:if="${endPage < totalPages}" class="page-link">&gt;</a></li>
