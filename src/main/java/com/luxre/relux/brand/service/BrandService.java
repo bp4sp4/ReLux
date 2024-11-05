@@ -19,10 +19,8 @@ public class BrandService {
 
     private final BrandRepository brandRepository;
     
- // 실제 파일 시스템의 경로로 수정
     private static final String IMAGE_DIRECTORY = "src/main/resources/static/images/brandimg";
 
-    
     public List<String> getRandomImages(int count) {
         try {
             Path dirPath = Paths.get(IMAGE_DIRECTORY);
@@ -32,7 +30,7 @@ public class BrandService {
                     String fileName = path.getFileName().toString().toLowerCase();
                     return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".svg") || fileName.endsWith(".webp");
                 })
-                .map(path -> "/static/images/brandimg/" + path.getFileName().toString()) // URL 경로로 변경
+                .map(path -> "/images/brandimg/" + path.getFileName().toString()) // URL 경로로 변경
                 .collect(Collectors.toList());
 
             Collections.shuffle(allImages); // 무작위 섞기
@@ -42,6 +40,7 @@ public class BrandService {
             return Collections.emptyList();
         }
     }
+
 
 
     // 생성자 주입
