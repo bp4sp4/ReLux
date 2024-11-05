@@ -1,11 +1,6 @@
 package com.luxre.relux.brand.service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,30 +13,6 @@ import com.luxre.relux.brand.repository.BrandRepository;
 public class BrandService {
 
     private final BrandRepository brandRepository;
-    
-    private static final String IMAGE_DIRECTORY = "src/main/resources/static/images/brandimg";
-
-    public List<String> getRandomImages(int count) {
-        try {
-            Path dirPath = Paths.get(IMAGE_DIRECTORY);
-            List<String> allImages = Files.list(dirPath)
-                .filter(Files::isRegularFile)
-                .filter(path -> {
-                    String fileName = path.getFileName().toString().toLowerCase();
-                    return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".svg") || fileName.endsWith(".webp");
-                })
-                .map(path -> "/images/brandimg/" + path.getFileName().toString()) // URL 경로로 변경
-                .collect(Collectors.toList());
-
-            Collections.shuffle(allImages); // 무작위 섞기
-            return allImages.stream().limit(count).collect(Collectors.toList()); // 상위 count개 선택
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Collections.emptyList();
-        }
-    }
-
-
 
     // 생성자 주입
     public BrandService(BrandRepository brandRepository) {

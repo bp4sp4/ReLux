@@ -26,18 +26,14 @@ public class MainController {
     private MainService mainService;
 	private PostRepository postRepository;
 	private BrandRepository brandRepository;
-	private BrandService brandService;
 
 	
-	public MainController(MainService mainService, PostRepository postRepository, BrandRepository brandRepository,BannerService bannerService, BrandService brandService) {
+	public MainController(MainService mainService, PostRepository postRepository, BrandRepository brandRepository,BannerService bannerService) {
 
 		this.mainService = mainService;
 		this.postRepository = postRepository;
 		this.brandRepository = brandRepository;
 		this.bannerService = bannerService;
-		this.brandService = brandService;
-
-		
 	}
 
 	@GetMapping("/list-view")
@@ -45,9 +41,7 @@ public class MainController {
 	    model.addAttribute("banners", bannerService.getBanners());
 	    List<Object[]> topPosts = mainService.getTopPosts();
 	    model.addAttribute("topPosts", topPosts);
-	    List<String> randomImages = brandService.getRandomImages(5); 
-	    
-	    model.addAttribute("images", randomImages);
+
 
 	    return "main/main";
 	}
