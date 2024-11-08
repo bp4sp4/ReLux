@@ -22,7 +22,7 @@
   <br>
 </div>
 (마우스 우클릭 통해 새창으로 열어 봐주시면 편하게 보실수 있습니다.)
-<h2>ReLux Demo - <a target="_blank" href="http://43.202.49.54:8080/brand/list-view" >ReLux</a> <br>
+<h2>ReLux Demo - <a target="_blank" href="http://43.202.49.54:8080/main/list-view" >ReLux</a> <br>
 Relux All Figma - <a target="_blank" href="https://www.figma.com/design/OlX9bcW7SySE93HnEr58QZ/ReLux?node-id=0-1&node-type=canvas&t=9IEPqH6qpLlMf6kn-0">Figma</a></h2>
 
 - 사용자 계정 : 아이디 : user001 비밀번호 : user001!
