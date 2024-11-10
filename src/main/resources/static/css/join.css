@@ -156,6 +156,20 @@ html {
     font-size: 12px;
     color: #f62c16;
 }
+.password__check{
+	 text-align: left;
+    padding: 0px 5px;
+}
+
+.password__check .textblue {
+    font-size: 12px;
+    color: #007bff;
+}
+
+.password__check .textred {
+    font-size: 12px;
+    color: #f62c16;
+}
 
 .duplicate__contents .d-none {
     display: none;
