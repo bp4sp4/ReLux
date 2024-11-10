@@ -439,3 +439,77 @@ a:hover{
 	font-family: 'GmarketSansMedium';
 }
 
+
+.floating-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Paperlogy-8ExtraBold';
+}
+
+.floating-button.main-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color : #be68f5;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    margin-bottom: 10px;
+    position : absolute;
+    bottom : 0px;
+}
+
+.floating-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-menu.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-90px);
+}
+
+.floating-menu .floating-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 10px;
+    letter-spacing : 1.5px;
+}
+
+.brand-button {
+    background-color: #4b7bec;
+}
+
+.market-button {
+    background-color: #fc5c65;
+}
+
+.floating-button:hover {
+    transform: scale(1.1);
+}
+
+
+
