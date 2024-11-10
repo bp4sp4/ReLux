@@ -75,6 +75,23 @@
             }
         });
     });
+    
+    let isMenuOpen = false;
+
+    function toggleFloatingMenu() {
+        const menu = document.querySelector('.floating-menu');
+        const mainButton = document.querySelector('.main-button');
+
+        menu.classList.toggle('show');
+
+        if (isMenuOpen) {
+            mainButton.textContent = '+';
+        } else {
+            mainButton.textContent = '-';
+        }
+
+        isMenuOpen = !isMenuOpen;
+    }
 </script>
     
     <th:block layout:fragment="script"></th:block>
