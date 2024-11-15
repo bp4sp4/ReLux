@@ -85,6 +85,7 @@
     display: flex;
     align-items: center;
     color: #8b8b8b;
+    cursor : pointer;
 }
 
 .main__wrap .main__wrap__brand .main__filter .main__brand__title .main__brand__resetbtn:active {

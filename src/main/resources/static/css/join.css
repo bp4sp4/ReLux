@@ -156,8 +156,22 @@ html {
     font-size: 12px;
     color: #f62c16;
 }
+
+.toggle__password {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #000000;
+}
+
+.toggle__password:hover {
+    color: #000000;
+}
 .password__check{
-	 text-align: left;
+	text-align: left;
     padding: 0px 5px;
 }
 
